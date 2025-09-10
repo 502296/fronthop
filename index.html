@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Fronthop – Find Trusted Builders. Fast.</title>
+
+  <meta name="description" content="Post your job once. Compare bids from verified builders across the U.S. Build with confidence on Fronthop." />
+
+  <link rel="icon" type="image/svg+xml" href="image/favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link rel="stylesheet" href="style.css?v=1" />
+
+</head>
+
+<body>
+
+  <div class="topline"></div>
+
+
+
+  <nav class="nav">
+
+    <div class="wrap">
+
+      <a class="brand" href="index.html" aria-label="Fronthop Home">
+
+        <!-- Simple SVG text logo (replace with your own anytime) -->
+
+        <svg class="logo" width="140" height="28" viewBox="0 0 280 56" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fronthop">
+
+          <title>Fronthop</title>
+
+          <text x="0" y="22" font-size="22" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" fill="#FFFFFF">Front</text>
+
+          <text x="68" y="22" font-size="22" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" fill="#F28C1B">hop</text>
+
+          <!-- Upward arrow accent -->
+
+          <path d="M118 25 l8 -8 l8 8" stroke="#F28C1B" stroke-width="3" fill="none" />
+
+        </svg>
+
+      </a>
+
+
+
+      <button class="nav-toggle" aria-label="Open menu" id="navToggle">☰</button>
+
+
+
+      <div class="nav-links" id="navLinks">
+
+        <a href="index.html#how">How it works</a>
+
+        <a href="index.html#categories">Categories</a>
+
+        <a href="pricing.html">Join as a Builder</a>
+
+        <a class="btn btn-outline" href="index.html#browse">Find Builders</a>
+
+        <a class="btn btn-primary" href="#post">Post a Job</a>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+
+
+  <header class="hero">
+
+    <div class="wrap hero-grid">
+
+      <div class="hero-copy">
+
+        <h1>Find trusted builders. <span class="accent">Fast.</span></h1>
+
+        <p class="sub">Post your job once. Compare bids. Build with confidence anywhere in the U.S.</p>
+
+
+
+        <form class="search" id="searchForm" action="#browse" method="get">
+
+          <label class="sr-only" for="service">Service</label>
+
+          <input id="service" name="service" type="text" placeholder="e.g., Roofing, Plumbing, Deck" autocomplete="off" required>
+
+
+
+          <label class="sr-only" for="zip">ZIP</label>
+
+          <input id="zip" name="zip" type="text" placeholder="ZIP code" pattern="\\d{5}" inputmode="numeric" required>
+
+
+
+          <button class="btn btn-primary" type="submit">Find Builders</button>
+
+        </form>
+
+
+
+        <div class="hero-ctas">
+
+          <a class="btn btn-outline" href="#post">Post a Job</a>
+
+          <a class="link" href="pricing.html">Join as a Builder</a>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="hero-media">
+
+        <!-- Responsive placeholder; replace srcset with your real images -->
+
+        <img
+
+          src="image/hero_1024.jpg"
+
+          srcset="image/hero_640.jpg 640w, image/hero_1024.jpg 1024w, image/hero_1600.jpg 1600w"
+
+          sizes="(max-width: 800px) 100vw, 50vw"
+
+          alt="Contractor measuring a deck frame"
+
+          loading="eager"
+
+          decoding="async"
+
+        />
+
+        <div class="hero-card">
+
+          <strong>4.8 ★</strong> Average builder rating
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+
+  <section class="how" id="how">
+
+    <div class="wrap">
+
+      <h2>How it works</h2>
+
+      <div class="grid-3">
+
+        <div class="step">
+
+          <div class="ico">1</div>
+
+          <h3>Post your job</h3>
+
+          <p>Describe your project and add photos. It takes two minutes.</p>
+
+        </div>
+
+        <div class="step">
+
+          <div class="ico">2</div>
+
+          <h3>Compare bids</h3>
+
+          <p>Get quotes from vetted builders near you. No hidden fees.</p>
+
+        </div>
+
+        <div class="step">
+
+          <div class="ico">3</div>
+
+          <h3>Hire with confidence</h3>
+
+          <p>Check ratings, portfolios, and verification badges.</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <section class="cats" id="categories">
+
+    <div class="wrap">
+
+      <h2>Top Categories</h2>
+
+      <div class="chips">
+
+        <a href="#browse" class="chip">Roofing</a>
+
+        <a href="#browse" class="chip">Decks & Porches</a>
+
+        <a href="#browse" class="chip">Plumbing</a>
+
+        <a href="#browse" class="chip">Electrical</a>
+
+        <a href="#browse" class="chip">Landscaping</a>
+
+        <a href="#browse" class="chip">Flooring</a>
+
+        <a href="#browse" class="chip">Painting</a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <section class="featured" id="browse">
+
+    <div class="wrap">
+
+      <div class="section-head">
+
+        <h2>Featured Builders</h2>
+
+        <a class="link" href="pricing.html">Get featured →</a>
+
+      </div>
+
+
+
+      <div class="cards">
+
+        <!-- Builder Card -->
+
+        <article class="card">
+
+          <img src="image/builder1.jpg" alt="Builder portfolio thumbnail" loading="lazy" decoding="async">
+
+          <div class="card-body">
+
+            <h3>Blue Ridge Roofing</h3>
+
+            <p class="meta">Louisville, KY · <span class="badge badge-verified">Verified</span> · ⭐ 4.9 (182)</p>
+
+            <p class="excerpt">Roof repairs, full replacements, storm damage claims.</p>
+
+            <div class="actions">
+
+              <a class="btn btn-outline" href="#">View Profile</a>
+
+              <a class="btn btn-primary" href="#post">Request Quote</a>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <article class="card">
+
+          <img src="image/builder2.jpg" alt="Builder portfolio thumbnail" loading="lazy" decoding="async">
+
+          <div class="card-body">
+
+            <h3>Craft & Timber Decks</h3>
+
+            <p class="meta">Cincinnati, OH · ⭐ 4.8 (145)</p>
+
+            <p class="excerpt">Custom decks & porches with premium materials.</p>
+
+            <div class="actions">
+
+              <a class="btn btn-outline" href="#">View Profile</a>
+
+              <a class="btn btn-primary" href="#post">Request Quote</a>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <article class="card">
+
+          <img src="image/builder3.jpg" alt="Builder portfolio thumbnail" loading="lazy" decoding="async">
+
+          <div class="card-body">
+
+            <h3>BrightFlow Plumbing</h3>
+
+            <p class="meta">Nashville, TN · <span class="badge">Insured</span> · ⭐ 4.7 (96)</p>
+
+            <p class="excerpt">Fast diagnostics, repipes, water heaters.</p>
+
+            <div class="actions">
+
+              <a class="btn btn-outline" href="#">View Profile</a>
+
+              <a class="btn btn-primary" href="#post">Request Quote</a>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <section class="post" id="post">
+
+    <div class="wrap">
+
+      <h2>Post a Job</h2>
+
+      <form class="post-form" action="#" method="post">
+
+        <div class="grid-2">
+
+          <div>
+
+            <label for="ptype">Service Type</label>
+
+            <input id="ptype" name="ptype" type="text" placeholder="e.g., Roof repair" required>
+
+          </div>
+
+          <div>
+
+            <label for="zip2">ZIP Code</label>
+
+            <input id="zip2" name="zip2" type="text" placeholder="12345" pattern="\\d{5}" inputmode="numeric" required>
+
+          </div>
+
+        </div>
+
+        <div>
+
+          <label for="desc">Project Details</label>
+
+          <textarea id="desc" name="desc" rows="4" placeholder="Tell us what you need (dimensions, materials, timing)…" required></textarea>
+
+        </div>
+
+        <div>
+
+          <label for="budget">Estimated Budget (optional)</label>
+
+          <input id="budget" name="budget" type="text" placeholder="$2,000–$5,000">
+
+        </div>
+
+        <div class="form-actions">
+
+          <button class="btn btn-primary" type="submit">Submit Job</button>
+
+          <p class="small">By posting, you agree to our <a href="#">Terms</a> and <a href="#">Privacy</a>.</p>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </section>
+
+
+
+  <footer class="footer">
+
+    <div class="wrap">
+
+      <div class="foot-grid">
+
+        <div>
+
+          <div class="foot-brand">Fronthop</div>
+
+          <p class="muted">Connecting homeowners with verified builders across the United States.</p>
+
+        </div>
+
+        <div>
+
+          <h4>Platform</h4>
+
+          <ul>
+
+            <li><a href="#how">How it works</a></li>
+
+            <li><a href="#categories">Categories</a></li>
+
+            <li><a href="pricing.html">Pricing</a></li>
+
+          </ul>
+
+        </div>
+
+        <div>
+
+          <h4>Company</h4>
+
+          <ul>
+
+            <li><a href="#">About</a></li>
+
+            <li><a href="#">Contact</a></li>
+
+            <li><a href="#">FAQ</a></li>
+
+          </ul>
+
+        </div>
+
+        <div>
+
+          <h4>Legal</h4>
+
+          <ul>
+
+            <li><a href="#">Terms</a></li>
+
+            <li><a href="#">Privacy</a></li>
+
+            <li><a href="#">DMCA</a></li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+      <div class="foot-bottom">
+
+        <span>© <span id="year"></span> Fronthop, Inc.</span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+
+  <script>
+
+    // Mobile nav toggle
+
+    const navToggle = document.getElementById('navToggle');
+
+    const navLinks = document.getElementById('navLinks');
+
+    navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+
+
+    // Year
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+  </script>
+
+</body>
+
+</html>
