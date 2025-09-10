@@ -16,7 +16,7 @@
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link rel="stylesheet" href="style.css?v=2" />
+  <link rel="stylesheet" href="style.css?v=3" />
 
 </head>
 
@@ -28,7 +28,7 @@
 
 
 
-  <!-- 🔥 Navbar -->
+  <!-- ======= Navbar ======= -->
 
   <nav class="nav">
 
@@ -36,7 +36,13 @@
 
       <a class="brand" href="index.html" aria-label="Fronthop Home">
 
-        <img src="image/fronthop_logo.png" alt="Fronthop" class="site-logo">
+        <picture>
+
+          <source srcset="image/fronthop_logo.svg?v=3" type="image/svg+xml">
+
+          <img src="image/fronthop_logo.png?v=3" alt="Fronthop" class="site-logo" width="240" height="64">
+
+        </picture>
 
       </a>
 
@@ -66,7 +72,7 @@
 
 
 
-  <!-- 🔥 Hero Section -->
+  <!-- ======= Hero ======= -->
 
   <header class="hero">
 
@@ -86,9 +92,13 @@
 
           <input id="service" name="service" type="text" placeholder="e.g., Roofing, Plumbing, Deck" autocomplete="off" required>
 
+
+
           <label class="sr-only" for="zip">ZIP</label>
 
           <input id="zip" name="zip" type="text" placeholder="ZIP code" pattern="\\d{5}" inputmode="numeric" required>
+
+
 
           <button class="btn btn-primary" type="submit">Find Builders</button>
 
@@ -112,9 +122,9 @@
 
         <img
 
-          src="image/hero_1024.jpg"
+          src="image/hero_1024.jpg?v=3"
 
-          srcset="image/hero_640.jpg 640w, image/hero_1024.jpg 1024w, image/hero_1600.jpg 1600w"
+          srcset="image/hero_640.jpg?v=3 640w, image/hero_1024.jpg?v=3 1024w, image/hero_1600.jpg?v=3 1600w"
 
           sizes="(max-width: 800px) 100vw, 50vw"
 
@@ -125,6 +135,8 @@
           decoding="async"
 
         />
+
+        <!-- اخفِ هذه البطاقة الآن، ويمكن تفعيلها من CSS -->
 
         <div class="hero-card">
 
@@ -140,7 +152,7 @@
 
 
 
-  <!-- 🔥 How it works -->
+  <!-- ======= How it works ======= -->
 
   <section class="how" id="how">
 
@@ -188,7 +200,7 @@
 
 
 
-  <!-- 🔥 Categories -->
+  <!-- ======= Categories ======= -->
 
   <section class="cats" id="categories">
 
@@ -220,7 +232,7 @@
 
 
 
-  <!-- 🔥 Featured -->
+  <!-- ======= Featured ======= -->
 
   <section class="featured" id="browse">
 
@@ -240,7 +252,7 @@
 
         <article class="card">
 
-          <img src="image/builder1.jpg" alt="Builder portfolio thumbnail" loading="lazy" decoding="async">
+          <img src="image/builder1.jpg?v=3" alt="Builder portfolio thumbnail" loading="lazy" decoding="async">
 
           <div class="card-body">
 
@@ -266,7 +278,7 @@
 
         <article class="card">
 
-          <img src="image/builder2.jpg" alt="Builder portfolio thumbnail" loading="lazy" decoding="async">
+          <img src="image/builder2.jpg?v=3" alt="Builder portfolio thumbnail" loading="lazy" decoding="async">
 
           <div class="card-body">
 
@@ -292,7 +304,7 @@
 
         <article class="card">
 
-          <img src="image/builder3.jpg" alt="Builder portfolio thumbnail" loading="lazy" decoding="async">
+          <img src="image/builder3.jpg?v=3" alt="Builder portfolio thumbnail" loading="lazy" decoding="async">
 
           <div class="card-body">
 
@@ -322,7 +334,7 @@
 
 
 
-  <!-- 🔥 Post Job -->
+  <!-- ======= Post Job ======= -->
 
   <section class="post" id="post">
 
@@ -384,7 +396,7 @@
 
 
 
-  <!-- 🔥 Footer -->
+  <!-- ======= Footer ======= -->
 
   <footer class="footer">
 
