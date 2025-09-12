@@ -8,127 +8,47 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Fronthop – Find Trusted Builders. Fast.</title>
+  <title>FrontHop – Home Projects Marketplace</title>
 
-  <meta name="description" content="Post your job once. Compare bids from verified builders across the U.S. Build with confidence on Fronthop." />
+  <meta name="description" content="FrontHop connects homeowners with local pros for building, repairs, and more—fast, fair, and simple." />
 
-  <link rel="icon" type="image/svg+xml" href="image/favicon.svg" />
-
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link rel="stylesheet" href="style.css?v=6" />
+  <link rel="stylesheet" href="style.css?v=1.0" />
 
 </head>
 
+<body data-role="home">
 
+  <!-- Top Bar / Navbar -->
 
-<body>
+  <header class="topbar">
 
-  <div class="topline"></div>
+    <div class="container nav">
 
+      <div class="brand">
 
-
-  <!-- ======= Navbar ======= -->
-
-  <nav class="nav">
-
-    <div class="wrap">
-
-      <a class="brand" href="index.html" aria-label="Fronthop Home">
-
-        <span class="front">Front</span><span class="hop">Hop</span>
-
-      </a>
-
-      <button class="nav-toggle" aria-label="Open menu" id="navToggle">☰</button>
-
-      <div class="nav-links" id="navLinks">
-
-        <a href="index.html#how">How it works</a>
-
-        <a href="index.html#categories">Categories</a>
-
-        <a href="pricing.html">Join as a Builder</a>
-
-        <a class="btn btn-outline" href="index.html#browse">Find Builders</a>
-
-        <a class="btn btn-primary" href="#post">Post a Job</a>
+        <span class="logo">Front<span>Hop</span></span>
 
       </div>
 
-    </div>
+      <nav class="menu">
 
-  </nav>
+        <a href="#how-home">How it works</a>
 
+        <a href="#gallery">Gallery</a>
 
+        <a href="#pricing">Pricing</a>
 
-  <!-- ======= Hero ======= -->
+        <a href="#contact">Contact</a>
 
-  <header class="hero">
+        <a href="#join-pro" class="btn small ghost">I’m a Pro</a>
 
-    <div class="wrap hero-grid">
+      </nav>
 
-      <div class="hero-copy">
+      <button class="hamburger" aria-label="Toggle menu" onclick="document.body.classList.toggle('nav-open')">
 
-        <h1 class="brand-title"><span class="front">Front</span><span class="hop">Hop</span></h1>
+        ☰
 
-        <h2 class="tagline">Find trusted builders. <span class="accent">Fast.</span></h2>
-
-        <p class="sub">Post your job once. Compare bids. Build with confidence anywhere in the U.S.</p>
-
-
-
-        <form class="search" id="searchForm" action="#browse" method="get">
-
-          <label class="sr-only" for="service">Service</label>
-
-          <input id="service" name="service" type="text" placeholder="e.g., Roofing, Plumbing, Deck" autocomplete="off" required>
-
-
-
-          <label class="sr-only" for="zip">ZIP</label>
-
-          <input id="zip" name="zip" type="text" placeholder="ZIP code" pattern="\\d{5}" inputmode="numeric" required>
-
-
-
-          <button class="btn btn-primary" type="submit">Find Builders</button>
-
-        </form>
-
-
-
-        <div class="hero-ctas">
-
-          <a class="btn btn-outline" href="#post">Post a Job</a>
-
-          <a class="link" href="pricing.html">Join as a Builder</a>
-
-        </div>
-
-      </div>
-
-
-
-      <div class="hero-media">
-
-        <img
-
-          src="image/hero_1024.jpg?v=6"
-
-          srcset="image/hero_640.jpg?v=6 640w, image/hero_1024.jpg?v=6 1024w, image/hero_1600.jpg?v=6 1600w"
-
-          sizes="(max-width: 800px) 100vw, 50vw"
-
-          alt="Contractor measuring a deck frame"
-
-          loading="eager"
-
-          decoding="async"
-
-        />
-
-      </div>
+      </button>
 
     </div>
 
@@ -136,45 +56,37 @@
 
 
 
-  <!-- ======= How it works ======= -->
+  <!-- Role Switch -->
 
-  <section class="how" id="how">
+  <section class="role-switch">
 
-    <div class="wrap">
+    <div class="container center">
 
-      <h2>How it works</h2>
+      <button class="btn switch" onclick="toggleRole('home')">I need work done</button>
 
-      <div class="grid-3">
+      <button class="btn switch ghost" onclick="toggleRole('pro')">I’m a Pro</button>
 
-        <div class="step">
+    </div>
 
-          <div class="ico">1</div>
+  </section>
 
-          <h3>Post your job</h3>
 
-          <p>Describe your project and add photos. It takes two minutes.</p>
 
-        </div>
+  <!-- Hero -->
 
-        <div class="step">
+  <section class="hero">
 
-          <div class="ico">2</div>
+    <div class="container hero-inner">
 
-          <h3>Compare bids</h3>
+      <h1>Get Home Projects Done—Fair Prices, Local Pros.</h1>
 
-          <p>Get quotes from vetted builders near you. No hidden fees.</p>
+      <p>Post your project with photos. Local contractors send offers. You choose the best match.</p>
 
-        </div>
+      <div class="cta-group">
 
-        <div class="step">
+        <a href="#post-job" class="btn">Post a Job (Free)</a>
 
-          <div class="ico">3</div>
-
-          <h3>Hire with confidence</h3>
-
-          <p>Check ratings, portfolios, and verification badges.</p>
-
-        </div>
+        <a href="#join-pro" class="btn ghost">Join as Pro</a>
 
       </div>
 
@@ -184,29 +96,21 @@
 
 
 
-  <!-- ======= Categories ======= -->
+  <!-- Why FrontHop -->
 
-  <section class="cats" id="categories">
+  <section class="section">
 
-    <div class="wrap">
+    <div class="container">
 
-      <h2>Top Categories</h2>
+      <h2 class="section-title">Why FrontHop</h2>
 
-      <div class="chips">
+      <div class="grid cards-3">
 
-        <a href="#browse" class="chip">Roofing</a>
+        <div class="card">Trusted local pros in all 50 states</div>
 
-        <a href="#browse" class="chip">Decks & Porches</a>
+        <div class="card">Multiple offers → better price & timeline</div>
 
-        <a href="#browse" class="chip">Plumbing</a>
-
-        <a href="#browse" class="chip">Electrical</a>
-
-        <a href="#browse" class="chip">Landscaping</a>
-
-        <a href="#browse" class="chip">Flooring</a>
-
-        <a href="#browse" class="chip">Painting</a>
+        <div class="card">Simple booking & messaging—no hassle</div>
 
       </div>
 
@@ -216,99 +120,29 @@
 
 
 
-  <!-- ======= Featured ======= -->
+  <!-- How it works (Homeowners) -->
 
-  <section class="featured" id="browse">
+  <section class="section for-home" id="how-home">
 
-    <div class="wrap">
+    <div class="container">
 
-      <div class="section-head">
+      <h2 class="section-title">How It Works (Homeowners)</h2>
 
-        <h2>Featured Builders</h2>
+      <div class="grid steps">
 
-        <a class="link" href="pricing.html">Get featured →</a>
+        <div class="card">1) Post a job with photos & details</div>
+
+        <div class="card">2) Get offers from vetted local pros</div>
+
+        <div class="card">3) Compare price, reviews & ETA</div>
+
+        <div class="card">4) Hire and schedule</div>
 
       </div>
 
+      <div class="center">
 
-
-      <div class="cards">
-
-        <article class="card">
-
-          <img src="image/builder1.jpg?v=6" alt="Builder portfolio thumbnail" loading="lazy" decoding="async">
-
-          <div class="card-body">
-
-            <h3>Blue Ridge Roofing</h3>
-
-            <p class="meta">Louisville, KY · <span class="badge badge-verified">Verified</span> · ⭐ 4.9 (182)</p>
-
-            <p class="excerpt">Roof repairs, full replacements, storm damage claims.</p>
-
-            <div class="actions">
-
-              <a class="btn btn-outline" href="#">View Profile</a>
-
-              <a class="btn btn-primary" href="#post">Request Quote</a>
-
-            </div>
-
-          </div>
-
-        </article>
-
-
-
-        <article class="card">
-
-          <img src="image/builder2.jpg?v=6" alt="Builder portfolio thumbnail" loading="lazy" decoding="async">
-
-          <div class="card-body">
-
-            <h3>Craft & Timber Decks</h3>
-
-            <p class="meta">Cincinnati, OH · ⭐ 4.8 (145)</p>
-
-            <p class="excerpt">Custom decks & porches with premium materials.</p>
-
-            <div class="actions">
-
-              <a class="btn btn-outline" href="#">View Profile</a>
-
-              <a class="btn btn-primary" href="#post">Request Quote</a>
-
-            </div>
-
-          </div>
-
-        </article>
-
-
-
-        <article class="card">
-
-          <img src="image/builder3.jpg?v=6" alt="Builder portfolio thumbnail" loading="lazy" decoding="async">
-
-          <div class="card-body">
-
-            <h3>BrightFlow Plumbing</h3>
-
-            <p class="meta">Nashville, TN · <span class="badge">Insured</span> · ⭐ 4.7 (96)</p>
-
-            <p class="excerpt">Fast diagnostics, repipes, water heaters.</p>
-
-            <div class="actions">
-
-              <a class="btn btn-outline" href="#">View Profile</a>
-
-              <a class="btn btn-primary" href="#post">Request Quote</a>
-
-            </div>
-
-          </div>
-
-        </article>
+        <a href="#post-job" class="btn">Post a Job (Free)</a>
 
       </div>
 
@@ -318,57 +152,95 @@
 
 
 
-  <!-- ======= Post Job ======= -->
+  <!-- How it works (Pros) -->
 
-  <section class="post" id="post">
+  <section class="section for-pro" id="how-pro">
 
-    <div class="wrap">
+    <div class="container">
 
-      <h2>Post a Job</h2>
+      <h2 class="section-title">How It Works (Pros)</h2>
 
-      <form class="post-form" action="#" method="post">
+      <div class="grid steps">
 
-        <div class="grid-2">
+        <div class="card">1) Create your pro profile (trade, service area, license)</div>
 
-          <div>
+        <div class="card">2) Get matched to nearby jobs</div>
 
-            <label for="ptype">Service Type</label>
+        <div class="card">3) Send offers & chat with clients</div>
 
-            <input id="ptype" name="ptype" type="text" placeholder="e.g., Roof repair" required>
+        <div class="card">4) Win projects and grow your business</div>
 
-          </div>
+      </div>
 
-          <div>
+      <div class="center">
 
-            <label for="zip2">ZIP Code</label>
+        <a href="#join-pro" class="btn">Join as Pro</a>
 
-            <input id="zip2" name="zip2" type="text" placeholder="12345" pattern="\\d{5}" inputmode="numeric" required>
+      </div>
 
-          </div>
+    </div>
+
+  </section>
+
+
+
+  <!-- Post a Job -->
+
+  <section class="section for-home" id="post-job">
+
+    <div class="container">
+
+      <h2 class="section-title">Post a Job</h2>
+
+      <form class="form card" onsubmit="demoSubmit(event, 'Job posted (demo)')">
+
+        <div class="grid form-grid">
+
+          <label class="field">
+
+            <span>Service Type</span>
+
+            <input type="text" placeholder="Porch repair, electrical, plumbing…" required>
+
+          </label>
+
+          <label class="field">
+
+            <span>ZIP Code</span>
+
+            <input type="text" placeholder="e.g., 40202" required>
+
+          </label>
+
+          <label class="field">
+
+            <span>Budget (Optional)</span>
+
+            <input type="text" placeholder="$1,500">
+
+          </label>
+
+          <label class="field full">
+
+            <span>Details</span>
+
+            <textarea placeholder="Describe the job…"></textarea>
+
+          </label>
+
+          <label class="field full">
+
+            <span>Photos</span>
+
+            <input type="file" multiple accept="image/*">
+
+          </label>
 
         </div>
 
-        <div>
+        <div class="center">
 
-          <label for="desc">Project Details</label>
-
-          <textarea id="desc" name="desc" rows="4" placeholder="Tell us what you need (dimensions, materials, timing)…" required></textarea>
-
-        </div>
-
-        <div>
-
-          <label for="budget">Estimated Budget (optional)</label>
-
-          <input id="budget" name="budget" type="text" placeholder="$2,000–$5,000">
-
-        </div>
-
-        <div class="form-actions">
-
-          <button class="btn btn-primary" type="submit">Submit Job</button>
-
-          <p class="small">By posting, you agree to our <a href="#">Terms</a> and <a href="#">Privacy</a>.</p>
+          <button class="btn" type="submit">Post a Job</button>
 
         </div>
 
@@ -380,77 +252,177 @@
 
 
 
-  <!-- ======= Footer ======= -->
+  <!-- Join as Pro -->
 
-  <footer class="footer">
+  <section class="section for-pro" id="join-pro">
 
-    <div class="wrap">
+    <div class="container">
 
-      <div class="foot-grid">
+      <h2 class="section-title">Join as Pro</h2>
 
-        <div>
+      <form class="form card" onsubmit="demoSubmit(event, 'Pro profile submitted (demo)')">
 
-          <div class="foot-brand">Fronthop</div>
+        <div class="grid form-grid">
 
-          <p class="muted">Connecting homeowners with verified builders across the United States.</p>
+          <label class="field">
 
-        </div>
+            <span>Business Name</span>
 
-        <div>
+            <input type="text" required>
 
-          <h4>Platform</h4>
+          </label>
 
-          <ul>
+          <label class="field">
 
-            <li><a href="#how">How it works</a></li>
+            <span>Trade</span>
 
-            <li><a href="#categories">Categories</a></li>
+            <input type="text" placeholder="Carpentry, Electrical, Plumbing…">
 
-            <li><a href="pricing.html">Pricing</a></li>
+          </label>
 
-          </ul>
+          <label class="field">
 
-        </div>
+            <span>Service Area (ZIPs)</span>
 
-        <div>
+            <input type="text" placeholder="40202, 40203…">
 
-          <h4>Company</h4>
+          </label>
 
-          <ul>
+          <label class="field">
 
-            <li><a href="#">About</a></li>
+            <span>License / Insurance (Optional)</span>
 
-            <li><a href="#">Contact</a></li>
+            <input type="text" placeholder="Upload or enter number">
 
-            <li><a href="#">FAQ</a></li>
-
-          </ul>
+          </label>
 
         </div>
 
-        <div>
+        <div class="center">
 
-          <h4>Legal</h4>
+          <button class="btn" type="submit">Create Profile</button>
 
-          <ul>
+        </div>
 
-            <li><a href="#">Terms</a></li>
+      </form>
 
-            <li><a href="#">Privacy</a></li>
+    </div>
 
-            <li><a href="#">DMCA</a></li>
+  </section>
 
-          </ul>
+
+
+  <!-- Gallery -->
+
+  <section class="section" id="gallery">
+
+    <div class="container">
+
+      <h2 class="section-title">Gallery / Portfolio</h2>
+
+      <div class="grid gallery">
+
+        <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+
+        <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- Pricing for Pros -->
+
+  <section class="section for-pro" id="pricing">
+
+    <div class="container">
+
+      <h2 class="section-title">Pricing for Pros</h2>
+
+      <div class="grid cards-3">
+
+        <div class="card">
+
+          <strong>Free</strong><br>Sign up & create profile
+
+        </div>
+
+        <div class="card">
+
+          <strong>Per-Lead</strong><br>Small fee to contact a job
+
+        </div>
+
+        <div class="card">
+
+          <strong>Success Fee</strong><br>Low % on won projects
 
         </div>
 
       </div>
 
-      <div class="foot-bottom">
+    </div>
 
-        <span>© <span id="year"></span> Fronthop, Inc.</span>
+  </section>
+
+
+
+  <!-- Safety & Reviews -->
+
+  <section class="section">
+
+    <div class="container">
+
+      <h2 class="section-title">Safety & Reviews</h2>
+
+      <div class="grid cards-3">
+
+        <div class="card">Verified profiles</div>
+
+        <div class="card">Ratings & photo proof</div>
+
+        <div class="card">In-app messaging</div>
 
       </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- Disclaimer -->
+
+  <section class="section">
+
+    <div class="container">
+
+      <p class="disclaimer">
+
+        <strong>Disclaimer:</strong> FrontHop is a marketplace connecting homeowners with independent contractors.
+
+        We do not perform, supervise, or guarantee any work. All jobs are agreements between homeowner and contractor.
+
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- Footer -->
+
+  <footer class="footer" id="contact">
+
+    <div class="container foot">
+
+      <div>contact@fronthop.com · (502) 296-8168</div>
+
+      <div>© <span id="year"></span> FrontHop</div>
 
     </div>
 
@@ -460,17 +432,9 @@
 
   <script>
 
-    // Mobile nav toggle
+    function toggleRole(role){ document.body.setAttribute('data-role', role); }
 
-    const navToggle = document.getElementById('navToggle');
-
-    const navLinks = document.getElementById('navLinks');
-
-    navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
-
-
-
-    // Year
+    function demoSubmit(e,msg){ e.preventDefault(); alert(msg); }
 
     document.getElementById('year').textContent = new Date().getFullYear();
 
