@@ -1,34 +1,32 @@
-// === FrontHop UI - Header + Promo Banner (auto-inject) ===
+// === FrontHop UI - Header + Promo Banner (auto-inject, replace if exists) ===
 
 (function(){
 
-  /* ================== CONFIG ================== */
+  /* ============== CONFIG ============== */
 
   const PROMO = {
 
-    enabled: true,                                  // تشغيل/إيقاف الشريط
+    enabled: true,
 
-    message: "🎉 التسجيل للمحترفين مجاني لفترة محدودة — ",
+    message: " Pro sign-up is FREE for a limited time — ",
 
-    linkText: "انضم الآن",
+    linkText: "Join now",
 
     linkHref: "/join-pro.html",
 
-    showOnPaths: ["*",],                            // "*" لكل الصفحات، أو [" / ", "/join-pro.html", ...]
+    showOnPaths: ["*"],           // "*" = all pages
 
-    rememberDismissDays: 7,                         // تذكّر إغلاق الشريط (أيام)
+    rememberDismissDays: 7,
 
-    // تواريخ الحملة (اختياري) بصيغة "YYYY-MM-DD"
+    startDate: null,              // e.g., "2025-09-15"
 
-    startDate: null,                                // مثال: "2025-09-01"
-
-    endDate: null                                   // مثال: "2025-10-01"
+    endDate: null                 // e.g., "2025-10-15"
 
   };
 
 
 
-  /* ================== STYLES ================== */
+  /* ============== STYLES ============== */
 
   const CSS = `
 
@@ -62,17 +60,17 @@
 
   .fh-promo{display:none;align-items:center;justify-content:center;gap:10px;
 
-    background:#222; color:#fff; padding:8px 14px; font-weight:600; font-size:14px;
+    background:#222;color:#fff;padding:8px 14px;font-weight:600;font-size:14px;
 
     border-bottom:1px solid #ffffff14}
 
-  .fh-promo a{color:#FF8C32; text-decoration:none}
+  .fh-promo a{color:#FF8C32;text-decoration:none}
 
   .fh-promo a:hover{text-decoration:underline}
 
-  .fh-promo .close{margin-inline-start:10px; font-weight:900; background:transparent; color:#fff;
+  .fh-promo .close{margin-inline-start:10px;font-weight:900;background:transparent;color:#fff;
 
-    border:1px solid #ffffff33; border-radius:8px; padding:2px 8px; cursor:pointer}
+    border:1px solid #ffffff33;border-radius:8px;padding:2px 8px;cursor:pointer}
 
   .fh-promo .close:hover{background:#ffffff18}
 
@@ -82,11 +80,11 @@
 
     .site-nav{
 
-      position:absolute; right:12px; top:62px; background:#1F1F21; border:1px solid #ffffff18;
+      position:absolute;right:12px;top:62px;background:#1F1F21;border:1px solid #ffffff18;
 
-      border-radius:14px; box-shadow:0 14px 28px rgba(0,0,0,.45);
+      border-radius:14px;box-shadow:0 14px 28px rgba(0,0,0,.45);
 
-      padding:10px; display:none; flex-direction:column; min-width:220px;
+      padding:10px;display:none;flex-direction:column;min-width:220px;
 
     }
 
@@ -94,7 +92,7 @@
 
     .site-nav a{padding:10px 12px}
 
-    .fh-promo{font-size:13px; padding:8px 10px}
+    .fh-promo{font-size:13px;padding:8px 10px}
 
   }`;
 
@@ -112,13 +110,11 @@
 
 
 
-  /* ================== HELPERS ================== */
+  /* ============== HELPERS ============== */
 
   const path = location.pathname.replace(/\/+$/,'') || '/';
 
   const inPaths = (list)=> list.includes('*') || list.map(x=>x.replace(/\/+$/,'')||'/').includes(path);
-
-
 
   const withinDates = ()=>{
 
@@ -132,59 +128,27 @@
 
   };
 
-
-
   const lsKey = "fh_promo_dismissed_until";
 
-  const promoDismissed = ()=>{
+  const promoDismissed = ()=>{ try{ const u=localStorage.getItem(lsKey); return u && new Date(u)>new Date(); }catch{ return false; } };
 
-    try{
-
-      const until = localStorage.getItem(lsKey);
-
-      return until && new Date(until) > new Date();
-
-    }catch{ return false; }
-
-  };
-
-  const setPromoDismissed = (days)=>{
-
-    try{
-
-      const until = new Date(); until.setDate(until.getDate() + (days||7));
-
-      localStorage.setItem(lsKey, until.toISOString());
-
-    }catch{}
-
-  };
+  const setPromoDismissed = (days)=>{ try{ const d=new Date(); d.setDate(d.getDate()+(days||7)); localStorage.setItem(lsKey,d.toISOString()); }catch{} };
 
 
 
-  /* ================== BUILD PROMO ================== */
+  /* ============== TEMPLATES ============== */
 
   const promoHTML = `
 
     <div class="fh-promo" role="region" aria-label="Announcement" aria-live="polite">
 
-      <span>${PROMO.message}</span>
-
-      <a href="${PROMO.linkHref}">${PROMO.linkText}</a>
+      <span>${PROMO.message}</span><a href="${PROMO.linkHref}">${PROMO.linkText}</a>
 
       <button class="close" type="button" aria-label="Close announcement">×</button>
 
     </div>`;
 
-
-
-  /* ================== BUILD HEADER ================== */
-
-  const headerHTML = `
-
-    ${PROMO.enabled && inPaths(PROMO.showOnPaths) && withinDates() && !promoDismissed() ? promoHTML : ''}
-
-    <header class="site-header">
+  const headerInner = `
 
       <a class="site-logo" href="/" aria-label="FrontHop Home">
 
@@ -210,41 +174,59 @@
 
         <a href="/privacy.html">Privacy</a>
 
-      </nav>
-
-    </header>`;
+      </nav>`;
 
 
 
-  // prepend header automatically
+  /* ============== INJECT/REPLACE HEADER ============== */
 
-  const wrap = document.createElement('div');
+  const shouldShowPromo = PROMO.enabled && inPaths(PROMO.showOnPaths) && withinDates() && !promoDismissed();
 
-  wrap.innerHTML = headerHTML;
-
-  document.body.prepend(wrap);
+  const existingHeader = document.querySelector('header.site-header');
 
 
 
-  // show promo if present
+  if (existingHeader){
+
+    // replace existing header content
+
+    existingHeader.innerHTML = headerInner;
+
+    // ensure any previous promo removed
+
+    const oldPromo = document.querySelector('.fh-promo'); if(oldPromo) oldPromo.remove();
+
+    if (shouldShowPromo){
+
+      existingHeader.insertAdjacentHTML('beforebegin', promoHTML);
+
+    }
+
+  } else {
+
+    // build from scratch
+
+    const wrap = document.createElement('div');
+
+    wrap.innerHTML = (shouldShowPromo ? promoHTML : '') + `<header class="site-header">${headerInner}</header>`;
+
+    document.body.prepend(wrap);
+
+  }
+
+
+
+  // promo behavior
 
   const promoEl = document.querySelector('.fh-promo');
 
   if(promoEl){ promoEl.style.display='flex';
 
-    const closeBtn = promoEl.querySelector('.close');
+    promoEl.querySelector('.close')?.addEventListener('click', ()=>{
 
-    if(closeBtn){
+      promoEl.style.display='none'; setPromoDismissed(PROMO.rememberDismissDays);
 
-      closeBtn.addEventListener('click', ()=>{
-
-        promoEl.style.display='none';
-
-        setPromoDismissed(PROMO.rememberDismissDays);
-
-      });
-
-    }
+    });
 
   }
 
@@ -282,11 +264,7 @@
 
     const href = a.getAttribute('href').replace(/\/+$/,'') || '/';
 
-    if((path==='/' && (href==='/'||href==='/index.html')) || href===path){
-
-      a.classList.add('active');
-
-    }
+    if((path==='/' && (href==='/'||href==='/index.html')) || href===path){ a.classList.add('active'); }
 
   });
 
