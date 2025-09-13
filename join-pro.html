@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Join as Pro — FrontHop</title>
+
+  <style>
+
+    :root{
+
+      --bg:#1C1C1E; --panel:#2C2C2E; --text:#FFFFFF; --muted:#B8B8B8;
+
+      --cta:#FF8C32; --cta-glow:rgba(255,140,50,0.35); --secondary:#3A3A3C;
+
+      --hop-red:#E53935; --shadow:0 12px 28px rgba(0,0,0,.35); --radius:16px;
+
+    }
+
+    *{box-sizing:border-box}
+
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
+
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.45}
+
+    .site-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+
+      padding:14px 20px;background:rgba(28,28,30,.8);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+
+    .site-logo{text-decoration:none;display:inline-flex;align-items:baseline;gap:6px;letter-spacing:1px}
+
+    .logo-front{font-weight:800;font-size:clamp(22px,4.6vw,36px);color:#fff}
+
+    .logo-hop{font-weight:900;font-size:clamp(22px,4.6vw,36px);color:var(--hop-red)}
+
+    .menu-btn{appearance:none;background:transparent;color:#fff;border:none;font-size:24px;line-height:1;cursor:pointer;padding:6px 8px}
+
+
+
+    .wrap{max-width:960px;margin:40px auto 24px;padding:0 20px}
+
+    .page-title{margin:0 0 8px;font-size:clamp(24px,5vw,38px);font-weight:800;text-align:center}
+
+    .page-sub{margin:0 auto 26px;max-width:720px;color:var(--muted);text-align:center}
+
+
+
+    .card{background:var(--panel);border:1px solid #ffffff0f;border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}
+
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+    .grid-1{grid-template-columns:1fr}
+
+    label{display:block;margin:0 0 6px;font-weight:700}
+
+    .req::after{content:" *";color:#f59e0b}
+
+    input,select,textarea{width:100%;border-radius:12px;border:1px solid #ffffff18;background:#1f1f21;color:#fff;
+
+      padding:12px 14px;font-size:16px;outline:none}
+
+    input:focus,select:focus,textarea:focus{border-color:#ffffff35}
+
+    textarea{min-height:120px;resize:vertical}
+
+    .help{margin-top:6px;color:var(--muted);font-size:13px}
+
+    .row{margin-bottom:14px}
+
+
+
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+
+    .btn{display:inline-block;text-decoration:none;padding:14px 22px;border-radius:999px;font-weight:700;border:1px solid transparent;cursor:pointer}
+
+    .btn-primary{background:var(--cta);color:#111;box-shadow:0 8px 22px var(--cta-glow)}
+
+    .btn-secondary{background:var(--secondary);color:#fff;border-color:#ffffff20}
+
+    .btn:disabled{opacity:.6;cursor:not-allowed}
+
+
+
+    .note{margin:12px 0 0;color:#a8a8a8;font-size:12px}
+
+    .status{margin-top:14px;padding:12px 14px;border-radius:12px;display:none}
+
+    .ok{display:block;background:#0b2d17;border:1px solid #124d28;color:#c9f3d6}
+
+    .err{display:block;background:#2d0b0b;border:1px solid #4d1212;color:#f3c9c9}
+
+
+
+    .site-footer{border-top:1px solid #ffffff0e;padding:26px 20px 40px;background:rgba(0,0,0,.25);margin-top:30px}
+
+    .disclaimer{max-width:1000px;margin:0 auto 12px;color:#a7a7a7;font-size:13px;text-align:center}
+
+    .copy{text-align:center;color:#9a9a9a;margin:0}
+
+
+
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+
+  </style>
+
+</head>
+
+<body>
+
+  <header class="site-header">
+
+    <a class="site-logo" href="/" aria-label="FrontHop Home">
+
+      <span class="logo-front">FRONT</span><span class="logo-hop">HOP</span>
+
+    </a>
+
+    <button class="menu-btn" aria-label="Open menu">≡</button>
+
+  </header>
+
+
+
+  <main class="wrap">
+
+    <h1 class="page-title">Join as Pro</h1>
+
+    <p class="page-sub">Get matched with local homeowners. Transparent jobs, simple messaging, and fair offers.</p>
+
+
+
+    <form id="proForm" class="card" novalidate>
+
+      <div class="row grid">
+
+        <div>
+
+          <label for="pro_name" class="req">Full Name / Business Name</label>
+
+          <input id="pro_name" name="pro_name" required placeholder="e.g., Royal Builders LLC" />
+
+        </div>
+
+        <div>
+
+          <label for="email" class="req">Email</label>
+
+          <input id="email" name="email" type="email" required placeholder="you@business.com" />
+
+        </div>
+
+      </div>
+
+
+
+      <div class="row grid">
+
+        <div>
+
+          <label for="phone" class="req">Phone</label>
+
+          <input id="phone" name="phone" required placeholder="(502) 555-0123" />
+
+        </div>
+
+        <div>
+
+          <label for="trade" class="req">Primary Trade</label>
+
+          <select id="trade" name="trade" required>
+
+            <option value="">Choose…</option>
+
+            <option>Porch / Deck</option>
+
+            <option>General Contractor</option>
+
+            <option>Electrical</option>
+
+            <option>Plumbing</option>
+
+            <option>Roofing</option>
+
+            <option>Painting</option>
+
+            <option>Flooring</option>
+
+            <option>Landscaping</option>
+
+            <option>Handyman</option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="row grid">
+
+        <div>
+
+          <label for="zip" class="req">Base ZIP</label>
+
+          <input id="zip" name="zip" inputmode="numeric" pattern="\\d{5}" required placeholder="40202" />
+
+          <div class="help">US 5-digit ZIP.</div>
+
+        </div>
+
+        <div>
+
+          <label for="radius" class="req">Service Radius (miles)</label>
+
+          <select id="radius" name="radius" required>
+
+            <option>10</option><option>25</option><option>50</option><option>75</option><option>100</option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="row grid">
+
+        <div>
+
+          <label for="license" class="req">Licensed?</label>
+
+          <select id="license" name="license" required>
+
+            <option>Yes</option><option>No</option><option>Not required</option>
+
+          </select>
+
+        </div>
+
+        <div>
+
+          <label for="insurance" class="req">Insurance?</label>
+
+          <select id="insurance" name="insurance" required>
+
+            <option>Yes</option><option>No</option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="row">
+
+        <label for="about">About your business (optional)</label>
+
+        <textarea id="about" name="about" placeholder="Years in business, team size, specialties, notable projects…"></textarea>
+
+      </div>
+
+
+
+      <div class="row">
+
+        <label for="website">Website / Portfolio (optional)</label>
+
+        <input id="website" name="website" type="url" placeholder="https://…" />
+
+      </div>
+
+
+
+      <div class="row">
+
+        <label><input id="agree" type="checkbox" required /> I agree to FrontHop’s Terms & Privacy.</label>
+
+        <div class="help">FrontHop is a marketplace; jobs are direct agreements between pros and homeowners.</div>
+
+      </div>
+
+
+
+      <div class="actions">
+
+        <button id="submitBtn" class="btn btn-primary" type="submit">Apply to Join</button>
+
+        <a class="btn btn-secondary" href="/">Cancel</a>
+
+      </div>
+
+
+
+      <div id="ok" class="status" style="display:none;"></div>
+
+      <div id="err" class="status" style="display:none;"></div>
+
+
+
+      <p class="note">
+
+        After we review your info, we’ll activate your account.  
+
+        (Subscription for pros will be added later; masked jobs until shortlisted.)
+
+      </p>
+
+    </form>
+
+  </main>
+
+
+
+  <footer class="site-footer">
+
+    <p class="disclaimer">
+
+      FrontHop is a marketplace connecting homeowners with independent contractors.
+
+      We do not perform, supervise, or guarantee any work.
+
+    </p>
+
+    <p class="copy">© 2025 FrontHop</p>
+
+  </footer>
+
+
+
+  <script>
+
+    const form = document.getElementById('proForm');
+
+    const ok = document.getElementById('ok');
+
+    const err = document.getElementById('err');
+
+    const submitBtn = document.getElementById('submitBtn');
+
+
+
+    form.addEventListener('submit', (e) => {
+
+      e.preventDefault();
+
+      ok.style.display = 'none'; err.style.display = 'none';
+
+
+
+      // تحقق بسيط
+
+      if (!/^\d{5}$/.test(document.getElementById('zip').value)) {
+
+        err.textContent = "Please enter a valid 5-digit ZIP code.";
+
+        err.className = "status err"; err.style.display = 'block'; return;
+
+      }
+
+
+
+      // وضع تجريبي بدون باكند
+
+      const data = Object.fromEntries(new FormData(form));
+
+      console.log("Pro application (demo):", data);
+
+      ok.textContent = "Application received. We’ll contact you via email.";
+
+      ok.className = "status ok"; ok.style.display = 'block';
+
+      form.reset();
+
+    });
+
+  </script>
+
+</body>
+
+</html>
