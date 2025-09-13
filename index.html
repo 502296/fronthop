@@ -18,21 +18,21 @@
 
     :root{
 
-      --bg:#1C1C1E;          
+      --bg:#1C1C1E;
 
-      --panel:#2C2C2E;       
+      --panel:#2C2C2E;
 
-      --text:#FFFFFF;        
+      --text:#FFFFFF;
 
-      --muted:#B8B8B8;       
+      --muted:#B8B8B8;
 
-      --cta:#FF8C32;         
+      --cta:#FF8C32;
 
       --cta-glow:rgba(255,140,50,0.35);
 
-      --secondary:#3A3A3C;   
+      --secondary:#3A3A3C;
 
-      --hop-red:#E53935;     
+      --hop-red:#E53935;
 
       --shadow:0 12px 28px rgba(0,0,0,.35);
 
@@ -86,7 +86,7 @@
 
 
 
-    /* شعار يسار */
+    /* Logo */
 
     .site-logo{
 
@@ -127,6 +127,8 @@
     .btn-secondary{background:var(--secondary); color:#fff; border-color:#ffffff20}
 
     .btn-secondary:hover{background:#4A4A4D}
+
+    .demo-row{margin-top:20px}
 
     .tiny-note{margin-top:14px; color:#a8a8a8; font-size:12px}
 
@@ -202,8 +204,6 @@
 
 
 
-    /* ===== Responsive ===== */
-
     @media (max-width:900px){
 
       .value-grid{grid-template-columns:1fr}
@@ -211,6 +211,10 @@
     }
 
   </style>
+
+
+
+  <!-- Auto header/nav -->
 
   <script defer src="/fronthop-ui.js"></script>
 
@@ -222,15 +226,11 @@
 
   <header class="site-header">
 
-    <!-- شعار يسار -->
-
     <a class="site-logo" href="/" aria-label="FrontHop Home">
 
       <span class="logo-front">FRONT</span><span class="logo-hop">HOP</span>
 
     </a>
-
-    <!-- زر قائمة يمين -->
 
     <button class="menu-btn" aria-label="Open menu">≡</button>
 
@@ -250,6 +250,8 @@
 
     </p>
 
+
+
     <div class="cta-row">
 
       <a class="btn btn-primary" href="/post.html">Post a Job (Free)</a>
@@ -258,13 +260,31 @@
 
     </div>
 
+
+
+    <!-- 🔍 Quick Job Access -->
+
+    <div class="cta-row demo-row" id="jobQuickOpen" style="gap:8px;">
+
+      <input id="jobIdInput" type="text" placeholder="Enter Job ID (e.g., FH-99999)"
+
+             style="min-width:260px; padding:12px 14px; border-radius:999px; border:1px solid #ffffff25;
+
+                    background:#1f1f21; color:#fff; outline:none; font-size:16px;">
+
+      <a id="jobGoBtn" class="btn btn-secondary" href="#">Go</a>
+
+    </div>
+
+
+
     <p class="tiny-note">FrontHop is a marketplace connecting homeowners with independent contractors.</p>
 
   </section>
 
 
 
-  <!-- VALUE / WHY -->
+  <!-- VALUE -->
 
   <section class="value">
 
@@ -365,6 +385,36 @@
     <p class="copy">© 2025 FrontHop</p>
 
   </footer>
+
+
+
+  <script>
+
+    // Quick Job ID Navigation
+
+    (function(){
+
+      const input = document.getElementById('jobIdInput');
+
+      const goBtn = document.getElementById('jobGoBtn');
+
+      function openJob(){
+
+        const id = (input.value || '').trim();
+
+        if(!id){ input.focus(); return; }
+
+        location.href = `track.html?job=${encodeURIComponent(id)}#offers`;
+
+      }
+
+      goBtn.addEventListener('click', (e)=>{ e.preventDefault(); openJob(); });
+
+      input.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ e.preventDefault(); openJob(); }});
+
+    })();
+
+  </script>
 
 </body>
 
