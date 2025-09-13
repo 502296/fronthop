@@ -26,9 +26,29 @@
 
     .sub{margin:0 auto 22px;max-width:780px;color:var(--muted);text-align:center}
 
+
+
+    .quick{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:14px 0 22px}
+
+    .quick input{min-width:260px;padding:12px 14px;border-radius:999px;border:1px solid #ffffff25;
+
+      background:#1f1f21;color:#fff;outline:none;font-size:16px}
+
+    .btn{display:inline-block;text-decoration:none;padding:10px 16px;border-radius:999px;font-weight:700;
+
+      border:1px solid transparent;cursor:pointer}
+
+    .btn-primary{background:var(--cta);color:#111}
+
+    .btn-secondary{background:#3A3A3C;color:#fff;border-color:#ffffff25}
+
+
+
     .bar{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:18px 0}
 
     .chip{background:#1f1f21;border:1px solid #ffffff18;border-radius:999px;padding:6px 10px;color:#ddd;font-size:12px}
+
+
 
     .card{background:var(--panel);border:1px solid #ffffff12;border-radius:16px;padding:18px;box-shadow:var(--shadow)}
 
@@ -43,12 +63,6 @@
     .pro{font-weight:800}
 
     .meta{color:#cfcfcf}
-
-    .btn{display:inline-block;text-decoration:none;padding:10px 16px;border-radius:999px;font-weight:700;border:1px solid transparent;cursor:pointer}
-
-    .btn-primary{background:var(--cta);color:#111}
-
-    .btn-secondary{background:#3A3A3C;color:#fff;border-color:#ffffff25}
 
     .empty{color:#bdbdbd;text-align:center;margin:12px 0}
 
@@ -70,13 +84,35 @@
 
 
 
+    <!-- Quick Job Access -->
+
+    <div class="quick" aria-label="Quick Job Access">
+
+      <input id="jobIdInput" type="text" placeholder="Enter Job ID (e.g., FH-99999)" />
+
+      <a id="jobGoBtn" class="btn btn-secondary" href="#">Go</a>
+
+    </div>
+
+
+
+    <!-- Job summary -->
+
     <section id="jobCard" class="card job"></section>
+
+
+
+    <!-- Pro submission link -->
 
     <div class="row" style="justify-content:center;gap:12px;margin-bottom:10px">
 
       <a id="submitOfferLink" class="btn btn-secondary">Pro? Submit an Offer</a>
 
     </div>
+
+
+
+    <!-- Offers -->
 
     <section class="grid" id="offers"></section>
 
@@ -134,19 +170,47 @@
 
     const $ = (s)=>document.querySelector(s);
 
+
+
+    // Read job from URL (fallback to mock)
+
     const jobParam = new URLSearchParams(location.search).get('job');
 
     const job = {...mockJob, id: jobParam || mockJob.id};
 
 
 
-    // link for pros to submit offer
+    // Quick Job Access: prefill with current ID
+
+    const input = $('#jobIdInput');
+
+    const goBtn = $('#jobGoBtn');
+
+    input.value = job.id;
+
+    function openJob(){
+
+      const id = (input.value || '').trim();
+
+      if(!id){ input.focus(); return; }
+
+      location.href = `track.html?job=${encodeURIComponent(id)}#offers`;
+
+    }
+
+    goBtn.addEventListener('click', (e)=>{ e.preventDefault(); openJob(); });
+
+    input.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ e.preventDefault(); openJob(); }});
+
+
+
+    // Link for pros to submit an offer for this job
 
     $('#submitOfferLink').href = `/submit-offer.html?job=${encodeURIComponent(job.id)}`;
 
 
 
-    // render job card
+    // Render job card
 
     $('#jobCard').innerHTML = `
 
@@ -180,7 +244,7 @@
 
 
 
-    // load offers saved locally for this job
+    // Load locally saved offers for this job
 
     const key = 'fh_offers_' + job.id;
 
@@ -188,7 +252,7 @@
 
 
 
-    // combine: show newest local offers first, then mock offers
+    // Combine: newest local offers first, then mock offers
 
     const offers = [...localOffers, ...mockOffers];
 
@@ -214,7 +278,7 @@
 
             <div class="pro">${o.pro}</div>
 
-            <div class="meta"> ${o.rating?`⭐ ${o.rating} • `:''}${o.jobs?`${o.jobs} jobs`:''}</div>
+            <div class="meta">${o.rating?`⭐ ${o.rating} • `:''}${o.jobs?`${o.jobs} jobs`:''}</div>
 
           </div>
 
