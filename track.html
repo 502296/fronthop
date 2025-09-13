@@ -24,13 +24,11 @@
 
     .title{margin:0 0 8px;font-size:clamp(24px,5vw,38px);font-weight:800;text-align:center}
 
-    .sub{margin:0 auto 22px;max-width:720px;color:var(--muted);text-align:center}
+    .sub{margin:0 auto 22px;max-width:780px;color:var(--muted);text-align:center}
 
     .bar{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:18px 0}
 
     .chip{background:#1f1f21;border:1px solid #ffffff18;border-radius:999px;padding:6px 10px;color:#ddd;font-size:12px}
-
-
 
     .card{background:var(--panel);border:1px solid #ffffff12;border-radius:16px;padding:18px;box-shadow:var(--shadow)}
 
@@ -52,6 +50,8 @@
 
     .btn-secondary{background:#3A3A3C;color:#fff;border-color:#ffffff25}
 
+    .empty{color:#bdbdbd;text-align:center;margin:12px 0}
+
     @media (max-width:900px){.grid{grid-template-columns:1fr}}
 
   </style>
@@ -60,7 +60,7 @@
 
 <body>
 
-  <!-- الهيدر يُحقن تلقائيًا -->
+  <!-- Header injected by fronthop-ui.js -->
 
   <main class="wrap">
 
@@ -70,15 +70,17 @@
 
 
 
-    <!-- شريط معلومات الطلب -->
-
     <section id="jobCard" class="card job"></section>
 
+    <div class="row" style="justify-content:center;gap:12px;margin-bottom:10px">
 
+      <a id="submitOfferLink" class="btn btn-secondary">Pro? Submit an Offer</a>
 
-    <!-- العروض -->
+    </div>
 
     <section class="grid" id="offers"></section>
+
+    <p id="emptyState" class="empty" style="display:none">No offers yet. Check back soon.</p>
 
   </main>
 
@@ -102,7 +104,7 @@
 
   <script>
 
-    // ===== Mock data (نستبدلها لاحقًا ببيانات حقيقية من الباكند) =====
+    // ===== Demo job data (replace later with real fetch) =====
 
     const mockJob = {
 
@@ -122,17 +124,13 @@
 
     const mockOffers = [
 
-      {pro:"River City Builders", price: "1,450", eta:"3-4 days", rating:4.8, jobs:126, message:"Can start Monday. Includes materials + 1-year warranty."},
+      {pro:"River City Builders", price:"1450", eta:"3–4 days", rating:4.8, jobs:126, message:"Can start Monday. Includes materials + 1-year warranty."},
 
-      {pro:"Urban Handyman Co.",  price: "1,200", eta:"5-6 days", rating:4.5, jobs:89,  message:"Labor only, paint not included. We’re licensed & insured."},
-
-      {pro:"Derby Renovations",   price: "1,950", eta:"2-3 days", rating:5.0, jobs:210, message:"Premium materials, fast turnaround. References available."}
+      {pro:"Urban Handyman Co.",  price:"1200", eta:"5–6 days", rating:4.5, jobs:89,  message:"Labor only, paint not included. We’re licensed & insured."},
 
     ];
 
 
-
-    // ===== Helpers =====
 
     const $ = (s)=>document.querySelector(s);
 
@@ -142,7 +140,13 @@
 
 
 
-    // Render job summary
+    // link for pros to submit offer
+
+    $('#submitOfferLink').href = `/submit-offer.html?job=${encodeURIComponent(job.id)}`;
+
+
+
+    // render job card
 
     $('#jobCard').innerHTML = `
 
@@ -176,43 +180,67 @@
 
 
 
-    // Render offers
+    // load offers saved locally for this job
+
+    const key = 'fh_offers_' + job.id;
+
+    const localOffers = JSON.parse(localStorage.getItem(key) || '[]');
+
+
+
+    // combine: show newest local offers first, then mock offers
+
+    const offers = [...localOffers, ...mockOffers];
+
+
 
     const offersEl = $('#offers');
 
-    offersEl.innerHTML = mockOffers.map(o=>`
+    const emptyEl = $('#emptyState');
 
-      <article class="card offer">
 
-        <div class="row">
 
-          <div class="pro">${o.pro}</div>
+    if (!offers.length){
 
-          <div class="meta">⭐ ${o.rating} • ${o.jobs} jobs</div>
+      emptyEl.style.display = 'block';
 
-        </div>
+    } else {
 
-        <div class="row">
+      offersEl.innerHTML = offers.map(o=>`
 
-          <div><strong>$${o.price}</strong> total</div>
+        <article class="card offer">
 
-          <div class="meta">ETA: ${o.eta}</div>
+          <div class="row">
 
-        </div>
+            <div class="pro">${o.pro}</div>
 
-        <p style="margin:6px 0 0;color:#ddd">${o.message}</p>
+            <div class="meta"> ${o.rating?`⭐ ${o.rating} • `:''}${o.jobs?`${o.jobs} jobs`:''}</div>
 
-        <div class="row" style="margin-top:8px">
+          </div>
 
-          <button class="btn btn-primary" onclick="alert('Demo: you accepted ${o.pro}.')">Accept</button>
+          <div class="row">
 
-          <button class="btn btn-secondary" onclick="alert('Demo: offer dismissed.')">Dismiss</button>
+            <div><strong>$${o.price}</strong> total</div>
 
-        </div>
+            <div class="meta">ETA: ${o.eta}</div>
 
-      </article>
+          </div>
 
-    `).join('');
+          <p style="margin:6px 0 0;color:#ddd">${o.message}</p>
+
+          <div class="row" style="margin-top:8px">
+
+            <button class="btn btn-primary" onclick="alert('Demo: you accepted ${o.pro}.')">Accept</button>
+
+            <button class="btn btn-secondary" onclick="alert('Demo: offer dismissed.')">Dismiss</button>
+
+          </div>
+
+        </article>
+
+      `).join('');
+
+    }
 
   </script>
 
