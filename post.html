@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Post a Job — FrontHop</title>
+
+
+
+  <style>
+
+    /* ===== Theme (مطابق للصفحة الرئيسية) ===== */
+
+    :root{
+
+      --bg:#1C1C1E; --panel:#2C2C2E; --text:#FFFFFF; --muted:#B8B8B8;
+
+      --cta:#FF8C32; --cta-glow:rgba(255,140,50,0.35); --secondary:#3A3A3C;
+
+      --hop-red:#E53935; --shadow:0 12px 28px rgba(0,0,0,.35); --radius:16px;
+
+      --ok:#22c55e; --warn:#f59e0b; --err:#ef4444;
+
+    }
+
+    *{box-sizing:border-box}
+
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
+
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.45}
+
+
+
+    /* Header (نفس ترتيب الشعار يسار، القائمة يمين) */
+
+    .site-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;
+
+      justify-content:space-between;padding:14px 20px;background:rgba(28,28,30,.8);
+
+      backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+
+    .site-logo{text-decoration:none;display:inline-flex;align-items:baseline;gap:6px;letter-spacing:1px}
+
+    .logo-front{font-weight:800;font-size:clamp(22px,4.6vw,36px);color:#fff}
+
+    .logo-hop{font-weight:900;font-size:clamp(22px,4.6vw,36px);color:var(--hop-red)}
+
+    .menu-btn{appearance:none;background:transparent;color:#fff;border:none;font-size:24px;line-height:1;cursor:pointer;padding:6px 8px}
+
+
+
+    /* Container */
+
+    .wrap{max-width:960px;margin:40px auto 24px;padding:0 20px}
+
+    .page-title{margin:0 0 8px;font-size:clamp(24px,5vw,38px);font-weight:800;text-align:center}
+
+    .page-sub{margin:0 auto 26px;max-width:720px;color:var(--muted);text-align:center}
+
+
+
+    /* Form card */
+
+    .card{background:var(--panel);border:1px solid #ffffff0f;border-radius:var(--radius);
+
+      box-shadow:var(--shadow);padding:20px}
+
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+    .grid-1{grid-template-columns:1fr}
+
+    label{display:block;margin:0 0 6px;font-weight:700}
+
+    .req::after{content:" *";color:var(--warn)}
+
+    input,select,textarea{width:100%;border-radius:12px;border:1px solid #ffffff18;background:#1f1f21;color:#fff;
+
+      padding:12px 14px;font-size:16px;outline:none}
+
+    input:focus,select:focus,textarea:focus{border-color:#ffffff35}
+
+    textarea{min-height:140px;resize:vertical}
+
+    .help{margin-top:6px;color:var(--muted);font-size:13px}
+
+    .row{margin-bottom:14px}
+
+
+
+    /* Buttons */
+
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+
+    .btn{display:inline-block;text-decoration:none;padding:14px 22px;border-radius:999px;font-weight:700;
+
+      border:1px solid transparent;cursor:pointer}
+
+    .btn-primary{background:var(--cta);color:#111;box-shadow:0 8px 22px var(--cta-glow)}
+
+    .btn-secondary{background:var(--secondary);color:#fff;border-color:#ffffff20}
+
+    .btn:disabled{opacity:.6;cursor:not-allowed}
+
+    .note{margin:14px 0 0;color:#a8a8a8;font-size:12px}
+
+
+
+    /* Inline chips */
+
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+
+    .chip{background:#1f1f21;border:1px solid #ffffff18;border-radius:999px;padding:6px 10px;font-size:12px;color:#ddd}
+
+
+
+    /* Status */
+
+    .status{margin-top:14px;padding:12px 14px;border-radius:12px;display:none}
+
+    .status.ok{display:block;background:#0b2d17;border:1px solid #124d28;color:#c9f3d6}
+
+    .status.err{display:block;background:#2d0b0b;border:1px solid #4d1212;color:#f3c9c9}
+
+
+
+    /* Footer */
+
+    .site-footer{border-top:1px solid #ffffff0e;padding:26px 20px 40px;background:rgba(0,0,0,.25);margin-top:30px}
+
+    .disclaimer{max-width:1000px;margin:0 auto 12px;color:#a7a7a7;font-size:13px;text-align:center}
+
+    .copy{text-align:center;color:#9a9a9a;margin:0}
+
+
+
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Header -->
+
+  <header class="site-header">
+
+    <a class="site-logo" href="/" aria-label="FrontHop Home">
+
+      <span class="logo-front">FRONT</span><span class="logo-hop">HOP</span>
+
+    </a>
+
+    <button class="menu-btn" aria-label="Open menu">≡</button>
+
+  </header>
+
+
+
+  <!-- Content -->
+
+  <main class="wrap">
+
+    <h1 class="page-title">Post a Job</h1>
+
+    <p class="page-sub">Tell us what you need. Local, verified pros will send offers — you compare and choose.</p>
+
+
+
+    <form id="jobForm" class="card" novalidate>
+
+      <!-- 1) Job Basics -->
+
+      <div class="row grid">
+
+        <div>
+
+          <label for="service" class="req">Service Type</label>
+
+          <select id="service" name="service" required>
+
+            <option value="">Choose a service…</option>
+
+            <option>Porch repair</option>
+
+            <option>Deck or patio</option>
+
+            <option>Electrical</option>
+
+            <option>Plumbing</option>
+
+            <option>Roofing</option>
+
+            <option>Painting</option>
+
+            <option>Flooring</option>
+
+            <option>Landscaping</option>
+
+            <option>General handyman</option>
+
+          </select>
+
+        </div>
+
+        <div>
+
+          <label for="zip" class="req">ZIP Code</label>
+
+          <input id="zip" name="zip" inputmode="numeric" pattern="\\d{5}" placeholder="e.g., 40202" required />
+
+          <div class="help">US 5-digit ZIP (numbers only).</div>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="row grid">
+
+        <div>
+
+          <label for="budget">Budget (Optional)</label>
+
+          <input id="budget" name="budget" inputmode="decimal" placeholder="$1,500" />
+
+        </div>
+
+        <div>
+
+          <label for="date">Preferred Start (Optional)</label>
+
+          <input id="date" name="preferred_start" type="date" />
+
+        </div>
+
+      </div>
+
+
+
+      <!-- 2) Details -->
+
+      <div class="row">
+
+        <label for="details" class="req">Details</label>
+
+        <textarea id="details" name="details" maxlength="1200" placeholder="Describe the job… materials, size, current condition, access, timing…"
+
+          required></textarea>
+
+        <div class="help"><span id="charCount">0</span>/1200 characters</div>
+
+        <div class="chips">
+
+          <span class="chip">Tip: add sizes</span>
+
+          <span class="chip">Add deadlines</span>
+
+          <span class="chip">Add reference photos</span>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- 3) Photos -->
+
+      <div class="row">
+
+        <label for="photos">Photos (Optional)</label>
+
+        <input id="photos" name="photos" type="file" accept="image/*" multiple />
+
+        <div class="help" id="photoHelp">No files selected.</div>
+
+      </div>
+
+
+
+      <!-- 4) Contact -->
+
+      <div class="row grid">
+
+        <div>
+
+          <label for="name" class="req">Full Name</label>
+
+          <input id="name" name="name" placeholder="Your name" required />
+
+        </div>
+
+        <div>
+
+          <label for="email" class="req">Email</label>
+
+          <input id="email" name="email" type="email" placeholder="you@example.com" required />
+
+        </div>
+
+      </div>
+
+      <div class="row grid">
+
+        <div>
+
+          <label for="phone" class="req">Phone</label>
+
+          <input id="phone" name="phone" inputmode="tel" placeholder="(502) 296-8168" required />
+
+        </div>
+
+        <div>
+
+          <label for="contact_pref">Contact Preference</label>
+
+          <select id="contact_pref" name="contact_pref">
+
+            <option>Any</option>
+
+            <option>Text</option>
+
+            <option>Call</option>
+
+            <option>Email</option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- 5) Terms -->
+
+      <div class="row">
+
+        <label><input id="agree" type="checkbox" required /> I agree that FrontHop connects me with independent contractors.</label>
+
+        <div class="help">FrontHop does not perform, supervise, or guarantee work.</div>
+
+      </div>
+
+
+
+      <!-- Actions -->
+
+      <div class="actions">
+
+        <button id="submitBtn" class="btn btn-primary" type="submit">Post Job</button>
+
+        <a class="btn btn-secondary" href="/">Cancel</a>
+
+      </div>
+
+
+
+      <!-- Status messages -->
+
+      <div id="ok" class="status ok">Your job was submitted. We’ll email you a confirmation.</div>
+
+      <div id="err" class="status err">Submission failed. Please check your connection and try again.</div>
+
+
+
+      <p class="note">By posting, you consent to be contacted by FrontHop and local pros about your project.</p>
+
+    </form>
+
+  </main>
+
+
+
+  <!-- Footer -->
+
+  <footer class="site-footer">
+
+    <p class="disclaimer">
+
+      Disclaimer: FrontHop is a marketplace connecting homeowners with independent contractors.
+
+      We do not perform, supervise, or guarantee any work. All jobs are agreements between homeowner and contractor.
+
+    </p>
+
+    <p class="copy">© 2025 FrontHop</p>
+
+  </footer>
+
+
+
+  <script>
+
+    /* ===== UX helpers ===== */
+
+    const details = document.getElementById('details');
+
+    const charCount = document.getElementById('charCount');
+
+    const photos = document.getElementById('photos');
+
+    const photoHelp = document.getElementById('photoHelp');
+
+    const form = document.getElementById('jobForm');
+
+    const ok = document.getElementById('ok');
+
+    const err = document.getElementById('err');
+
+    const submitBtn = document.getElementById('submitBtn');
+
+
+
+    details.addEventListener('input', () => {
+
+      charCount.textContent = details.value.length;
+
+    });
+
+    photos.addEventListener('change', () => {
+
+      if (!photos.files.length) { photoHelp.textContent = 'No files selected.'; return; }
+
+      photoHelp.textContent = `${photos.files.length} file(s) selected`;
+
+    });
+
+
+
+    /* ===== Submission (front-end only) =====
+
+       لاحقًا سنضع رابط الويب-آب هنا (Google Apps Script أو API).
+
+       غيّر FORM_ENDPOINT إلى رابطك، وستُرسل البيانات باستخدام fetch.
+
+    */
+
+    const FORM_ENDPOINT = ""; // مثال: "https://script.google.com/macros/s/XXX/exec"
+
+
+
+    form.addEventListener('submit', async (e) => {
+
+      e.preventDefault();
+
+      ok.style.display = 'none'; err.style.display = 'none';
+
+
+
+      // تحقق بسيط من الـZIP
+
+      if (!/^\d{5}$/.test(document.getElementById('zip').value)) {
+
+        err.textContent = "Please enter a valid 5-digit ZIP code."; err.style.display = 'block'; return;
+
+      }
+
+
+
+      // لو ما كو باكند بعد، نعرض نجاح وهمي + نطبع البيانات بالكونسول
+
+      if (!FORM_ENDPOINT) {
+
+        console.log("Form data (demo, not sent):", Object.fromEntries(new FormData(form)));
+
+        ok.style.display = 'block';
+
+        form.reset();
+
+        charCount.textContent = "0";
+
+        photoHelp.textContent = "No files selected.";
+
+        return;
+
+      }
+
+
+
+      // إرسال فعلي إذا تم وضع رابط
+
+      try {
+
+        submitBtn.disabled = true;
+
+        const fd = new FormData(form);
+
+        // ملاحظة: الصور سترسل كـmultipart/form-data
+
+        const res = await fetch(FORM_ENDPOINT, { method: "POST", body: fd });
+
+        // بعض Web App ترجع no-cors؛ نعتبرها نجاح إذا ما رمى خطأ
+
+        ok.style.display = 'block';
+
+        form.reset();
+
+        charCount.textContent = "0";
+
+        photoHelp.textContent = "No files selected.";
+
+      } catch (e2) {
+
+        console.error(e2);
+
+        err.style.display = 'block';
+
+      } finally {
+
+        submitBtn.disabled = false;
+
+      }
+
+    });
+
+  </script>
+
+</body>
+
+</html>
