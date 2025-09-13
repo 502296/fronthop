@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Track Job — FrontHop</title>
+
+  <style>
+
+    :root{--bg:#1C1C1E;--panel:#2C2C2E;--text:#FFFFFF;--muted:#B8B8B8;--cta:#FF8C32;
+
+      --hop-red:#E53935;--shadow:0 12px 28px rgba(0,0,0,.35);--radius:16px}
+
+    *{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
+
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.45}
+
+    .wrap{max-width:1000px;margin:40px auto 24px;padding:0 20px}
+
+    .title{margin:0 0 8px;font-size:clamp(24px,5vw,38px);font-weight:800;text-align:center}
+
+    .sub{margin:0 auto 22px;max-width:720px;color:var(--muted);text-align:center}
+
+    .bar{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:18px 0}
+
+    .chip{background:#1f1f21;border:1px solid #ffffff18;border-radius:999px;padding:6px 10px;color:#ddd;font-size:12px}
+
+
+
+    .card{background:var(--panel);border:1px solid #ffffff12;border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+
+    .job{margin-bottom:16px}
+
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+    .offer{display:flex;flex-direction:column;gap:8px}
+
+    .row{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+
+    .pro{font-weight:800}
+
+    .meta{color:#cfcfcf}
+
+    .btn{display:inline-block;text-decoration:none;padding:10px 16px;border-radius:999px;font-weight:700;border:1px solid transparent;cursor:pointer}
+
+    .btn-primary{background:var(--cta);color:#111}
+
+    .btn-secondary{background:#3A3A3C;color:#fff;border-color:#ffffff25}
+
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- الهيدر يُحقن تلقائيًا -->
+
+  <main class="wrap">
+
+    <h1 class="title">Track Your Job</h1>
+
+    <p class="sub">View offers from local pros and choose the best match. Share this page only with trusted contacts.</p>
+
+
+
+    <!-- شريط معلومات الطلب -->
+
+    <section id="jobCard" class="card job"></section>
+
+
+
+    <!-- العروض -->
+
+    <section class="grid" id="offers"></section>
+
+  </main>
+
+
+
+  <footer class="site-footer" style="border-top:1px solid #ffffff12;padding:26px 20px 40px;background:rgba(0,0,0,.25);margin-top:30px">
+
+    <p style="max-width:1000px;margin:0 auto 12px;color:#a7a7a7;font-size:13px;text-align:center">
+
+      FrontHop connects homeowners with independent contractors. We do not perform, supervise, or guarantee any work.
+
+    </p>
+
+    <p style="text-align:center;color:#9a9a9a;margin:0">© 2025 FrontHop</p>
+
+  </footer>
+
+
+
+  <script defer src="/fronthop-ui.js"></script>
+
+  <script>
+
+    // ===== Mock data (نستبدلها لاحقًا ببيانات حقيقية من الباكند) =====
+
+    const mockJob = {
+
+      id: "FH-12345",
+
+      service: "Porch repair",
+
+      zip: "40202",
+
+      created: "2025-09-12",
+
+      status: "Open",
+
+      details: "Replace rotting porch beams and repaint. Approx 20ft length."
+
+    };
+
+    const mockOffers = [
+
+      {pro:"River City Builders", price: "1,450", eta:"3-4 days", rating:4.8, jobs:126, message:"Can start Monday. Includes materials + 1-year warranty."},
+
+      {pro:"Urban Handyman Co.",  price: "1,200", eta:"5-6 days", rating:4.5, jobs:89,  message:"Labor only, paint not included. We’re licensed & insured."},
+
+      {pro:"Derby Renovations",   price: "1,950", eta:"2-3 days", rating:5.0, jobs:210, message:"Premium materials, fast turnaround. References available."}
+
+    ];
+
+
+
+    // ===== Helpers =====
+
+    const $ = (s)=>document.querySelector(s);
+
+    const jobParam = new URLSearchParams(location.search).get('job');
+
+    const job = {...mockJob, id: jobParam || mockJob.id};
+
+
+
+    // Render job summary
+
+    $('#jobCard').innerHTML = `
+
+      <div class="row">
+
+        <div><strong>Job ID:</strong> ${job.id}</div>
+
+        <div class="meta">${job.created} • ${job.status}</div>
+
+      </div>
+
+      <div class="row">
+
+        <div><strong>Service:</strong> ${job.service}</div>
+
+        <div><strong>ZIP:</strong> ${job.zip}</div>
+
+      </div>
+
+      <div style="margin-top:8px;color:#ddd">${job.details}</div>
+
+      <div class="bar">
+
+        <span class="chip">Private link</span>
+
+        <span class="chip">Share with caution</span>
+
+      </div>
+
+    `;
+
+
+
+    // Render offers
+
+    const offersEl = $('#offers');
+
+    offersEl.innerHTML = mockOffers.map(o=>`
+
+      <article class="card offer">
+
+        <div class="row">
+
+          <div class="pro">${o.pro}</div>
+
+          <div class="meta">⭐ ${o.rating} • ${o.jobs} jobs</div>
+
+        </div>
+
+        <div class="row">
+
+          <div><strong>$${o.price}</strong> total</div>
+
+          <div class="meta">ETA: ${o.eta}</div>
+
+        </div>
+
+        <p style="margin:6px 0 0;color:#ddd">${o.message}</p>
+
+        <div class="row" style="margin-top:8px">
+
+          <button class="btn btn-primary" onclick="alert('Demo: you accepted ${o.pro}.')">Accept</button>
+
+          <button class="btn btn-secondary" onclick="alert('Demo: offer dismissed.')">Dismiss</button>
+
+        </div>
+
+      </article>
+
+    `).join('');
+
+  </script>
+
+</body>
+
+</html>
