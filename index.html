@@ -10,7 +10,209 @@
 
   <title>FrontHop — Get Home Projects Done</title>
 
-  <link rel="stylesheet" href="styles.css" />
+
+
+  <!-- CSS مدموج لتجنب مشاكل التحميل -->
+
+  <style>
+
+    /* ===== Theme ===== */
+
+    :root{
+
+      --bg:#1C1C1E;          /* خلفية داكنة */
+
+      --panel:#2C2C2E;       /* بطاقات */
+
+      --text:#FFFFFF;        /* نص أبيض */
+
+      --muted:#B8B8B8;       /* نص ثانوي */
+
+      --cta:#FF8C32;         /* زر أساسي (برتقالي) */
+
+      --cta-glow:rgba(255,140,50,0.35);
+
+      --secondary:#3A3A3C;   /* زر ثانوي */
+
+      --hop-red:#E53935;     /* كلمة HOP بالأحمر */
+
+      --shadow:0 12px 28px rgba(0,0,0,.35);
+
+      --radius:16px;
+
+    }
+
+
+
+    *{box-sizing:border-box}
+
+    html,body{
+
+      margin:0; padding:0;
+
+      background:var(--bg); color:var(--text);
+
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+      line-height:1.45;
+
+    }
+
+
+
+    /* ===== Header ===== */
+
+    .site-header{
+
+      position:sticky; top:0; z-index:50;
+
+      display:flex; align-items:center; justify-content:space-between;
+
+      gap:12px; padding:14px 20px;
+
+      background:rgba(28,28,30,.8); backdrop-filter: blur(8px);
+
+      border-bottom:1px solid rgba(255,255,255,.06);
+
+    }
+
+    .menu-btn{
+
+      appearance:none; background:transparent; color:#fff; border:none;
+
+      font-size:24px; line-height:1; cursor:pointer; padding:6px 8px;
+
+    }
+
+    .menu-btn:focus{outline:2px solid #fff3}
+
+
+
+    /* الشعار أعلى اليمين، كبير وأحرف كبيرة: FRONT أبيض + HOP أحمر */
+
+    .site-logo{
+
+      text-decoration:none; display:inline-flex; align-items:baseline; gap:6px;
+
+      letter-spacing:1px; user-select:none; margin-left:auto; /* يثبتها يمين */
+
+    }
+
+    .logo-front{font-weight:800; font-size:clamp(22px,4.6vw,36px); color:#fff}
+
+    .logo-hop{font-weight:900; font-size:clamp(22px,4.6vw,36px); color:var(--hop-red)}
+
+
+
+    /* ===== Hero ===== */
+
+    .hero{max-width:980px; margin:56px auto 24px; padding:0 20px; text-align:center}
+
+    .hero h1{margin:0 0 12px; font-size:clamp(26px,5.2vw,44px); font-weight:800}
+
+    .sublead{margin:0 auto 22px; max-width:740px; color:var(--muted); font-size:clamp(15px,2.6vw,18px)}
+
+    .cta-row{display:flex; justify-content:center; gap:14px; flex-wrap:wrap}
+
+    .btn{
+
+      display:inline-block; text-decoration:none; padding:14px 22px; border-radius:999px;
+
+      font-weight:700; box-shadow:var(--shadow); transition:.2s ease; border:1px solid transparent;
+
+    }
+
+    .btn-primary{background:var(--cta); color:#111; box-shadow:0 8px 22px var(--cta-glow)}
+
+    .btn-primary:hover{transform:translateY(-1px); filter:brightness(1.05)}
+
+    .btn-secondary{background:var(--secondary); color:#fff; border-color:#ffffff20}
+
+    .btn-secondary:hover{background:#4A4A4D}
+
+    .tiny-note{margin-top:14px; color:#a8a8a8; font-size:12px}
+
+
+
+    /* ===== Value Section ===== */
+
+    .value{max-width:1100px;margin:36px auto 8px;padding:0 20px}
+
+    .value-grid{
+
+      list-style:none; margin:0; padding:0;
+
+      display:grid; grid-template-columns:repeat(3,1fr); gap:16px;
+
+    }
+
+    .value-item{
+
+      background:var(--panel); border:1px solid #ffffff0f; border-radius:var(--radius);
+
+      padding:20px; text-align:center;
+
+    }
+
+    .value-item h3{margin:6px 0 6px; font-size:18px}
+
+    .value-item p{margin:0; color:var(--muted)}
+
+    .icon{font-size:26px}
+
+
+
+    /* ===== How It Works ===== */
+
+    .how{max-width:900px; margin:22px auto; padding:0 20px; text-align:center}
+
+    .how h2{margin:6px 0 12px; font-size:24px}
+
+    .steps{
+
+      margin:0 auto; padding:18px; max-width:700px; text-align:left;
+
+      background:var(--panel); border:1px solid #ffffff0f; border-radius:var(--radius);
+
+    }
+
+    .steps li{margin:8px 0}
+
+
+
+    /* ===== Bottom CTA ===== */
+
+    .callout{display:flex; justify-content:center; margin:32px 0 40px; padding:0 20px}
+
+    .btn-wide{min-width:280px}
+
+
+
+    /* ===== Footer ===== */
+
+    .site-footer{border-top:1px solid #ffffff0e; padding:26px 20px 40px; background:rgba(0,0,0,.25)}
+
+    .disclaimer{max-width:1000px;margin:0 auto 12px;color:#a7a7a7;font-size:13px}
+
+    .footer-nav{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:8px}
+
+    .footer-nav a{color:#ddd;text-decoration:none}
+
+    .footer-nav a:hover{text-decoration:underline}
+
+    .copy{text-align:center; color:#9a9a9a; margin:0}
+
+
+
+    /* ===== Responsive ===== */
+
+    @media (max-width:900px){
+
+      .value-grid{grid-template-columns:1fr}
+
+    }
+
+  </style>
 
 </head>
 
@@ -24,7 +226,7 @@
 
 
 
-    <!-- Logo (top-right, large, all caps: FRONT white + HOP red) -->
+    <!-- Logo: أعلى اليمين -->
 
     <a class="site-logo" href="/" aria-label="FrontHop Home">
 
@@ -126,7 +328,7 @@
 
 
 
-  <!-- SECONDARY CTA (bottom only, same primary action) -->
+  <!-- SECONDARY CTA -->
 
   <section class="callout">
 
