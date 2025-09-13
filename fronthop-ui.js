@@ -1,8 +1,34 @@
-<script>
-
-// === FrontHop UI - drop-in header ===
+// === FrontHop UI - Header + Promo Banner (auto-inject) ===
 
 (function(){
+
+  /* ================== CONFIG ================== */
+
+  const PROMO = {
+
+    enabled: true,                                  // تشغيل/إيقاف الشريط
+
+    message: "🎉 التسجيل للمحترفين مجاني لفترة محدودة — ",
+
+    linkText: "انضم الآن",
+
+    linkHref: "/join-pro.html",
+
+    showOnPaths: ["*",],                            // "*" لكل الصفحات، أو [" / ", "/join-pro.html", ...]
+
+    rememberDismissDays: 7,                         // تذكّر إغلاق الشريط (أيام)
+
+    // تواريخ الحملة (اختياري) بصيغة "YYYY-MM-DD"
+
+    startDate: null,                                // مثال: "2025-09-01"
+
+    endDate: null                                   // مثال: "2025-10-01"
+
+  };
+
+
+
+  /* ================== STYLES ================== */
 
   const CSS = `
 
@@ -32,13 +58,23 @@
 
     cursor:pointer;padding:6px 8px;display:none}
 
-  .promo{display:none;align-items:center;justify-content:center;gap:10px;
+  /* Promo */
+
+  .fh-promo{display:none;align-items:center;justify-content:center;gap:10px;
 
     background:#222; color:#fff; padding:8px 14px; font-weight:600; font-size:14px;
 
     border-bottom:1px solid #ffffff14}
 
-  .promo a{color:#FF8C32; text-decoration:none}
+  .fh-promo a{color:#FF8C32; text-decoration:none}
+
+  .fh-promo a:hover{text-decoration:underline}
+
+  .fh-promo .close{margin-inline-start:10px; font-weight:900; background:transparent; color:#fff;
+
+    border:1px solid #ffffff33; border-radius:8px; padding:2px 8px; cursor:pointer}
+
+  .fh-promo .close:hover{background:#ffffff18}
 
   @media (max-width:900px){
 
@@ -58,6 +94,8 @@
 
     .site-nav a{padding:10px 12px}
 
+    .fh-promo{font-size:13px; padding:8px 10px}
+
   }`;
 
 
@@ -74,27 +112,77 @@
 
 
 
-  // promo banner (بدّل القيمة إلى true لتفعيله)
+  /* ================== HELPERS ================== */
 
-  const SHOW_PROMO = false; // ← غيّرها إلى true لو تبي شريط "التسجيل مجاني"
+  const path = location.pathname.replace(/\/+$/,'') || '/';
+
+  const inPaths = (list)=> list.includes('*') || list.map(x=>x.replace(/\/+$/,'')||'/').includes(path);
+
+
+
+  const withinDates = ()=>{
+
+    const today = new Date();
+
+    if (PROMO.startDate){ const s = new Date(PROMO.startDate+"T00:00:00"); if (today < s) return false; }
+
+    if (PROMO.endDate){ const e = new Date(PROMO.endDate+"T23:59:59"); if (today > e) return false; }
+
+    return true;
+
+  };
+
+
+
+  const lsKey = "fh_promo_dismissed_until";
+
+  const promoDismissed = ()=>{
+
+    try{
+
+      const until = localStorage.getItem(lsKey);
+
+      return until && new Date(until) > new Date();
+
+    }catch{ return false; }
+
+  };
+
+  const setPromoDismissed = (days)=>{
+
+    try{
+
+      const until = new Date(); until.setDate(until.getDate() + (days||7));
+
+      localStorage.setItem(lsKey, until.toISOString());
+
+    }catch{}
+
+  };
+
+
+
+  /* ================== BUILD PROMO ================== */
 
   const promoHTML = `
 
-    <div class="promo" role="status" aria-live="polite">
+    <div class="fh-promo" role="region" aria-label="Announcement" aria-live="polite">
 
-      🎉 التسجيل للمحترفين مجاني لفترة محدودة —
+      <span>${PROMO.message}</span>
 
-      <a href="/join-pro.html">انضم الآن</a>
+      <a href="${PROMO.linkHref}">${PROMO.linkText}</a>
+
+      <button class="close" type="button" aria-label="Close announcement">×</button>
 
     </div>`;
 
 
 
-  // build header
+  /* ================== BUILD HEADER ================== */
 
   const headerHTML = `
 
-    ${SHOW_PROMO ? promoHTML : ''}
+    ${PROMO.enabled && inPaths(PROMO.showOnPaths) && withinDates() && !promoDismissed() ? promoHTML : ''}
 
     <header class="site-header">
 
@@ -138,11 +226,25 @@
 
 
 
-  // init promo visibility
+  // show promo if present
 
-  if(SHOW_PROMO){
+  const promoEl = document.querySelector('.fh-promo');
 
-    const el = document.querySelector('.promo'); if(el) el.style.display='flex';
+  if(promoEl){ promoEl.style.display='flex';
+
+    const closeBtn = promoEl.querySelector('.close');
+
+    if(closeBtn){
+
+      closeBtn.addEventListener('click', ()=>{
+
+        promoEl.style.display='none';
+
+        setPromoDismissed(PROMO.rememberDismissDays);
+
+      });
+
+    }
 
   }
 
@@ -176,8 +278,6 @@
 
   // active link highlight
 
-  const path = location.pathname.replace(/\/+$/,'') || '/';
-
   document.querySelectorAll('#site-nav a').forEach(a=>{
 
     const href = a.getAttribute('href').replace(/\/+$/,'') || '/';
@@ -191,5 +291,3 @@
   });
 
 })();
-
-</script>
