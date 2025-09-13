@@ -12,29 +12,27 @@
 
 
 
-  <!-- CSS مدموج لتجنب مشاكل التحميل -->
-
   <style>
 
     /* ===== Theme ===== */
 
     :root{
 
-      --bg:#1C1C1E;          /* خلفية داكنة */
+      --bg:#1C1C1E;          
 
-      --panel:#2C2C2E;       /* بطاقات */
+      --panel:#2C2C2E;       
 
-      --text:#FFFFFF;        /* نص أبيض */
+      --text:#FFFFFF;        
 
-      --muted:#B8B8B8;       /* نص ثانوي */
+      --muted:#B8B8B8;       
 
-      --cta:#FF8C32;         /* زر أساسي (برتقالي) */
+      --cta:#FF8C32;         
 
       --cta-glow:rgba(255,140,50,0.35);
 
-      --secondary:#3A3A3C;   /* زر ثانوي */
+      --secondary:#3A3A3C;   
 
-      --hop-red:#E53935;     /* كلمة HOP بالأحمر */
+      --hop-red:#E53935;     
 
       --shadow:0 12px 28px rgba(0,0,0,.35);
 
@@ -68,7 +66,7 @@
 
       display:flex; align-items:center; justify-content:space-between;
 
-      gap:12px; padding:14px 20px;
+      padding:14px 20px;
 
       background:rgba(28,28,30,.8); backdrop-filter: blur(8px);
 
@@ -88,13 +86,13 @@
 
 
 
-    /* الشعار أعلى اليمين، كبير وأحرف كبيرة: FRONT أبيض + HOP أحمر */
+    /* شعار يسار */
 
     .site-logo{
 
       text-decoration:none; display:inline-flex; align-items:baseline; gap:6px;
 
-      letter-spacing:1px; user-select:none; margin-left:auto; /* يثبتها يمين */
+      letter-spacing:1px; user-select:none;
 
     }
 
@@ -222,17 +220,17 @@
 
   <header class="site-header">
 
-    <button class="menu-btn" aria-label="Open menu">≡</button>
-
-
-
-    <!-- Logo: أعلى اليمين -->
+    <!-- شعار يسار -->
 
     <a class="site-logo" href="/" aria-label="FrontHop Home">
 
       <span class="logo-front">FRONT</span><span class="logo-hop">HOP</span>
 
     </a>
+
+    <!-- زر قائمة يمين -->
+
+    <button class="menu-btn" aria-label="Open menu">≡</button>
 
   </header>
 
