@@ -8,437 +8,161 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>FrontHop – Home Projects Marketplace</title>
+  <title>FrontHop — Get Home Projects Done</title>
 
-  <meta name="description" content="FrontHop connects homeowners with local pros for building, repairs, and more—fast, fair, and simple." />
-
-  <link rel="stylesheet" href="style.css?v=1.0" />
+  <link rel="stylesheet" href="styles.css" />
 
 </head>
 
-<body data-role="home">
+<body>
 
-  <!-- Top Bar / Navbar -->
+  <!-- HEADER -->
 
-  <header class="topbar">
+  <header class="site-header">
 
-    <div class="container nav">
+    <button class="menu-btn" aria-label="Open menu">≡</button>
 
-      <div class="brand">
 
-        <span class="logo">Front<span>Hop</span></span>
 
-      </div>
+    <!-- Logo (top-right, large, all caps: FRONT white + HOP red) -->
 
-      <nav class="menu">
+    <a class="site-logo" href="/" aria-label="FrontHop Home">
 
-        <a href="#how-home">How it works</a>
+      <span class="logo-front">FRONT</span><span class="logo-hop">HOP</span>
 
-        <a href="#gallery">Gallery</a>
-
-        <a href="#pricing">Pricing</a>
-
-        <a href="#contact">Contact</a>
-
-        <a href="#join-pro" class="btn small ghost">I’m a Pro</a>
-
-      </nav>
-
-      <button class="hamburger" aria-label="Toggle menu" onclick="document.body.classList.toggle('nav-open')">
-
-        ☰
-
-      </button>
-
-    </div>
+    </a>
 
   </header>
 
 
 
-  <!-- Role Switch -->
-
-  <section class="role-switch">
-
-    <div class="container center">
-
-      <button class="btn switch" onclick="toggleRole('home')">I need work done</button>
-
-      <button class="btn switch ghost" onclick="toggleRole('pro')">I’m a Pro</button>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- Hero -->
+  <!-- HERO -->
 
   <section class="hero">
 
-    <div class="container hero-inner">
+    <h1>Get Home Projects Done — Fair Prices, Local Pros.</h1>
 
-      <h1>Get Home Projects Done—Fair Prices, Local Pros.</h1>
+    <p class="sublead">
 
-      <p>Post your project with photos. Local contractors send offers. You choose the best match.</p>
+      Post your project with photos. Local contractors send offers. You choose the best match.
 
-      <div class="cta-group">
+    </p>
 
-        <a href="#post-job" class="btn">Post a Job (Free)</a>
+    <div class="cta-row">
 
-        <a href="#join-pro" class="btn ghost">Join as Pro</a>
+      <a class="btn btn-primary" href="/post.html">Post a Job (Free)</a>
 
-      </div>
+      <a class="btn btn-secondary" href="/join-pro.html">Join as Pro</a>
 
     </div>
+
+    <p class="tiny-note">FrontHop is a marketplace connecting homeowners with independent contractors.</p>
 
   </section>
 
 
 
-  <!-- Why FrontHop -->
+  <!-- VALUE / WHY -->
 
-  <section class="section">
+  <section class="value">
 
-    <div class="container">
+    <ul class="value-grid" role="list">
 
-      <h2 class="section-title">Why FrontHop</h2>
+      <li class="value-item">
 
-      <div class="grid cards-3">
+        <div class="icon" aria-hidden="true">🛡️</div>
 
-        <div class="card">Trusted local pros in all 50 states</div>
+        <h3>Verified pros in all 50 states</h3>
 
-        <div class="card">Multiple offers → better price & timeline</div>
+        <p>Background & profile checks keep quality high.</p>
 
-        <div class="card">Simple booking & messaging—no hassle</div>
+      </li>
 
-      </div>
+      <li class="value-item">
 
-    </div>
+        <div class="icon" aria-hidden="true">💬</div>
 
-  </section>
+        <h3>Multiple offers → better price & timeline</h3>
 
+        <p>Pros bid on your job; you compare and choose.</p>
 
+      </li>
 
-  <!-- How it works (Homeowners) -->
+      <li class="value-item">
 
-  <section class="section for-home" id="how-home">
+        <div class="icon" aria-hidden="true">📨</div>
 
-    <div class="container">
+        <h3>Simple booking & in-app messaging</h3>
 
-      <h2 class="section-title">How It Works (Homeowners)</h2>
+        <p>No hassle. Keep all conversations in one place.</p>
 
-      <div class="grid steps">
+      </li>
 
-        <div class="card">1) Post a job with photos & details</div>
-
-        <div class="card">2) Get offers from vetted local pros</div>
-
-        <div class="card">3) Compare price, reviews & ETA</div>
-
-        <div class="card">4) Hire and schedule</div>
-
-      </div>
-
-      <div class="center">
-
-        <a href="#post-job" class="btn">Post a Job (Free)</a>
-
-      </div>
-
-    </div>
+    </ul>
 
   </section>
 
 
 
-  <!-- How it works (Pros) -->
+  <!-- HOW IT WORKS -->
 
-  <section class="section for-pro" id="how-pro">
+  <section class="how">
 
-    <div class="container">
+    <h2>How It Works</h2>
 
-      <h2 class="section-title">How It Works (Pros)</h2>
+    <ol class="steps">
 
-      <div class="grid steps">
+      <li><strong>Post</strong> a job with photos & details</li>
 
-        <div class="card">1) Create your pro profile (trade, service area, license)</div>
+      <li><strong>Get offers</strong> from vetted local pros</li>
 
-        <div class="card">2) Get matched to nearby jobs</div>
+      <li><strong>Compare</strong> price, reviews & ETA</li>
 
-        <div class="card">3) Send offers & chat with clients</div>
+      <li><strong>Hire</strong> and schedule</li>
 
-        <div class="card">4) Win projects and grow your business</div>
-
-      </div>
-
-      <div class="center">
-
-        <a href="#join-pro" class="btn">Join as Pro</a>
-
-      </div>
-
-    </div>
+    </ol>
 
   </section>
 
 
 
-  <!-- Post a Job -->
+  <!-- SECONDARY CTA (bottom only, same primary action) -->
 
-  <section class="section for-home" id="post-job">
+  <section class="callout">
 
-    <div class="container">
-
-      <h2 class="section-title">Post a Job</h2>
-
-      <form class="form card" onsubmit="demoSubmit(event, 'Job posted (demo)')">
-
-        <div class="grid form-grid">
-
-          <label class="field">
-
-            <span>Service Type</span>
-
-            <input type="text" placeholder="Porch repair, electrical, plumbing…" required>
-
-          </label>
-
-          <label class="field">
-
-            <span>ZIP Code</span>
-
-            <input type="text" placeholder="e.g., 40202" required>
-
-          </label>
-
-          <label class="field">
-
-            <span>Budget (Optional)</span>
-
-            <input type="text" placeholder="$1,500">
-
-          </label>
-
-          <label class="field full">
-
-            <span>Details</span>
-
-            <textarea placeholder="Describe the job…"></textarea>
-
-          </label>
-
-          <label class="field full">
-
-            <span>Photos</span>
-
-            <input type="file" multiple accept="image/*">
-
-          </label>
-
-        </div>
-
-        <div class="center">
-
-          <button class="btn" type="submit">Post a Job</button>
-
-        </div>
-
-      </form>
-
-    </div>
+    <a class="btn btn-primary btn-wide" href="/post.html">Post a Job Now</a>
 
   </section>
 
 
 
-  <!-- Join as Pro -->
+  <!-- FOOTER -->
 
-  <section class="section for-pro" id="join-pro">
+  <footer class="site-footer">
 
-    <div class="container">
+    <p class="disclaimer">
 
-      <h2 class="section-title">Join as Pro</h2>
+      Disclaimer: FrontHop is a marketplace connecting homeowners with independent contractors.
 
-      <form class="form card" onsubmit="demoSubmit(event, 'Pro profile submitted (demo)')">
+      We do not perform, supervise, or guarantee any work. All jobs are agreements between homeowner and contractor.
 
-        <div class="grid form-grid">
+    </p>
 
-          <label class="field">
+    <nav class="footer-nav" aria-label="Footer">
 
-            <span>Business Name</span>
+      <a href="/about.html">About</a>
 
-            <input type="text" required>
+      <a href="/contact.html">Contact</a>
 
-          </label>
+      <a href="/terms.html">Terms</a>
 
-          <label class="field">
+      <a href="/privacy.html">Privacy</a>
 
-            <span>Trade</span>
+    </nav>
 
-            <input type="text" placeholder="Carpentry, Electrical, Plumbing…">
-
-          </label>
-
-          <label class="field">
-
-            <span>Service Area (ZIPs)</span>
-
-            <input type="text" placeholder="40202, 40203…">
-
-          </label>
-
-          <label class="field">
-
-            <span>License / Insurance (Optional)</span>
-
-            <input type="text" placeholder="Upload or enter number">
-
-          </label>
-
-        </div>
-
-        <div class="center">
-
-          <button class="btn" type="submit">Create Profile</button>
-
-        </div>
-
-      </form>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- Gallery -->
-
-  <section class="section" id="gallery">
-
-    <div class="container">
-
-      <h2 class="section-title">Gallery / Portfolio</h2>
-
-      <div class="grid gallery">
-
-        <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
-
-        <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- Pricing for Pros -->
-
-  <section class="section for-pro" id="pricing">
-
-    <div class="container">
-
-      <h2 class="section-title">Pricing for Pros</h2>
-
-      <div class="grid cards-3">
-
-        <div class="card">
-
-          <strong>Free</strong><br>Sign up & create profile
-
-        </div>
-
-        <div class="card">
-
-          <strong>Per-Lead</strong><br>Small fee to contact a job
-
-        </div>
-
-        <div class="card">
-
-          <strong>Success Fee</strong><br>Low % on won projects
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- Safety & Reviews -->
-
-  <section class="section">
-
-    <div class="container">
-
-      <h2 class="section-title">Safety & Reviews</h2>
-
-      <div class="grid cards-3">
-
-        <div class="card">Verified profiles</div>
-
-        <div class="card">Ratings & photo proof</div>
-
-        <div class="card">In-app messaging</div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- Disclaimer -->
-
-  <section class="section">
-
-    <div class="container">
-
-      <p class="disclaimer">
-
-        <strong>Disclaimer:</strong> FrontHop is a marketplace connecting homeowners with independent contractors.
-
-        We do not perform, supervise, or guarantee any work. All jobs are agreements between homeowner and contractor.
-
-      </p>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- Footer -->
-
-  <footer class="footer" id="contact">
-
-    <div class="container foot">
-
-      <div>contact@fronthop.com · (502) 296-8168</div>
-
-      <div>© <span id="year"></span> FrontHop</div>
-
-    </div>
+    <p class="copy">© 2025 FrontHop</p>
 
   </footer>
-
-
-
-  <script>
-
-    function toggleRole(role){ document.body.setAttribute('data-role', role); }
-
-    function demoSubmit(e,msg){ e.preventDefault(); alert(msg); }
-
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-  </script>
 
 </body>
 
