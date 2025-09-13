@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Submit Offer — FrontHop</title>
+
+  <style>
+
+    :root{--bg:#1C1C1E;--panel:#2C2C2E;--text:#FFFFFF;--muted:#B8B8B8;--cta:#FF8C32;
+
+      --hop-red:#E53935;--shadow:0 12px 28px rgba(0,0,0,.35);--radius:16px}
+
+    *{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
+
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.45}
+
+    .wrap{max-width:900px;margin:40px auto 24px;padding:0 20px}
+
+    .title{margin:0 0 8px;font-size:clamp(24px,5vw,38px);font-weight:800;text-align:center}
+
+    .sub{margin:0 auto 22px;max-width:720px;color:var(--muted);text-align:center}
+
+    .card{background:var(--panel);border:1px solid #ffffff12;border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+    .grid-1{grid-template-columns:1fr}
+
+    label{display:block;margin:0 0 6px;font-weight:700}
+
+    .req::after{content:" *";color:#f59e0b}
+
+    input,select,textarea{width:100%;border-radius:12px;border:1px solid #ffffff18;background:#1f1f21;color:#fff;
+
+      padding:12px 14px;font-size:16px;outline:none}
+
+    input:focus,select:focus,textarea:focus{border-color:#ffffff35}
+
+    textarea{min-height:120px;resize:vertical}
+
+    .row{margin-bottom:14px}
+
+    .btn{display:inline-block;text-decoration:none;padding:14px 22px;border-radius:999px;font-weight:700;border:1px solid transparent;cursor:pointer}
+
+    .btn-primary{background:var(--cta);color:#111}
+
+    .btn-secondary{background:#3A3A3C;color:#fff;border-color:#ffffff25}
+
+    .note{margin-top:10px;color:#a7a7a7;font-size:12px}
+
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Header injected by fronthop-ui.js -->
+
+
+
+  <main class="wrap">
+
+    <h1 class="title">Submit an Offer</h1>
+
+    <p class="sub">Provide a clear price, ETA, and short note. This is a demo flow — data is stored locally for now.</p>
+
+
+
+    <form id="offerForm" class="card" novalidate>
+
+      <div class="row grid">
+
+        <div>
+
+          <label class="req" for="pro">Business / Pro Name</label>
+
+          <input id="pro" name="pro" required placeholder="e.g., River City Builders" />
+
+        </div>
+
+        <div>
+
+          <label class="req" for="price">Total Price (USD)</label>
+
+          <input id="price" name="price" required inputmode="decimal" placeholder="1450" />
+
+        </div>
+
+      </div>
+
+
+
+      <div class="row grid">
+
+        <div>
+
+          <label class="req" for="eta">ETA</label>
+
+          <select id="eta" name="eta" required>
+
+            <option value="">Choose…</option>
+
+            <option>2–3 days</option><option>3–4 days</option><option>5–6 days</option><option>1–2 weeks</option>
+
+          </select>
+
+        </div>
+
+        <div>
+
+          <label for="rating">Rating (0–5, optional)</label>
+
+          <input id="rating" name="rating" inputmode="decimal" placeholder="4.8" />
+
+        </div>
+
+      </div>
+
+
+
+      <div class="row grid">
+
+        <div>
+
+          <label for="jobs">Completed Jobs (optional)</label>
+
+          <input id="jobs" name="jobs" inputmode="numeric" placeholder="126" />
+
+        </div>
+
+        <div>
+
+          <label for="license">Licensed? (optional)</label>
+
+          <select id="license" name="license">
+
+            <option>Yes</option><option>No</option><option>Not required</option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="row">
+
+        <label class="req" for="message">Short Message</label>
+
+        <textarea id="message" name="message" required placeholder="What’s included, when you can start, warranty…"></textarea>
+
+      </div>
+
+
+
+      <div class="row">
+
+        <button class="btn btn-primary" type="submit">Send Offer</button>
+
+        <a class="btn btn-secondary" href="/track.html">Back to Job</a>
+
+        <div class="note" id="jobInfo"></div>
+
+      </div>
+
+    </form>
+
+  </main>
+
+
+
+  <footer class="site-footer" style="border-top:1px solid #ffffff12;padding:26px 20px 40px;background:rgba(0,0,0,.25);margin-top:30px">
+
+    <p style="max-width:1000px;margin:0 auto 12px;color:#a7a7a7;font-size:13px;text-align:center">
+
+      FrontHop connects homeowners with independent contractors. We do not perform, supervise, or guarantee any work.
+
+    </p>
+
+    <p style="text-align:center;color:#9a9a9a;margin:0">© 2025 FrontHop</p>
+
+  </footer>
+
+
+
+  <script defer src="/fronthop-ui.js"></script>
+
+  <script>
+
+    const params = new URLSearchParams(location.search);
+
+    const jobId = params.get('job') || 'FH-12345'; // default for demo
+
+    document.getElementById('jobInfo').textContent = `Job ID: ${jobId}`;
+
+
+
+    const form = document.getElementById('offerForm');
+
+    form.addEventListener('submit', (e)=>{
+
+      e.preventDefault();
+
+      const data = Object.fromEntries(new FormData(form));
+
+      if(!data.pro || !data.price || !data.eta || !data.message){
+
+        alert('Please fill required fields.'); return;
+
+      }
+
+      const offer = {
+
+        pro: data.pro,
+
+        price: String(data.price).replace(/[^0-9.]/g,''),
+
+        eta: data.eta,
+
+        rating: data.rating ? Number(data.rating) : null,
+
+        jobs: data.jobs ? Number(data.jobs) : null,
+
+        message: data.message,
+
+        createdAt: new Date().toISOString()
+
+      };
+
+      // save to localStorage under this job
+
+      const key = 'fh_offers_' + jobId;
+
+      const list = JSON.parse(localStorage.getItem(key) || '[]');
+
+      list.unshift(offer); // newest first
+
+      localStorage.setItem(key, JSON.stringify(list));
+
+      // redirect to track page
+
+      location.href = `/track.html?job=${encodeURIComponent(jobId)}#offers`;
+
+    });
+
+  </script>
+
+</body>
+
+</html>
